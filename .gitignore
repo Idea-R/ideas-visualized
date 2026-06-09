@@ -30,3 +30,4 @@ next-env.d.ts
 # dev artifacts
 dev.log
 .playwright-mcp/
+.vercel
