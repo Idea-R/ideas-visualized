@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Ideas Visualized",
   description:
-    "A showcase of bespoke, music-synced, hand-rolled visual effects built from scratch with Canvas 2D and Web Audio.",
+    "A gallery of hand-rolled, music-synced visual effects built from scratch with Canvas 2D, Web Audio, and WebGL.",
 };
 
 export default function RootLayout({
@@ -35,9 +36,7 @@ export default function RootLayout({
           </nav>
         </header>
         {children}
-        <footer className="mx-auto max-w-6xl px-5 py-12 text-xs text-muted">
-          Built from scratch — Canvas 2D · Web Audio · no off-the-shelf engine.
-        </footer>
+        <SiteFooter />
       </body>
     </html>
   );

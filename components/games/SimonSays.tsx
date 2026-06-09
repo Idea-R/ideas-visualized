@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /**
- * Simon Says — a glowing-dot memory game in the visual style of the
+ * Simon Says, a glowing-dot memory game in the visual style of the
  * "Absorption Cursor" effect (radial-gradient glow, expanding pulse rings,
  * gently bobbing dots). Pure Canvas 2D + React, no dependencies, no audio.
  */
@@ -232,7 +232,7 @@ export function SimonSays() {
           });
         }
       } else {
-        // Wrong dot — game over (brief beat so the flash is visible).
+        // Wrong dot: game over (brief beat so the flash is visible).
         g.phase = "over";
         after(450, () => setPhaseBoth("over"));
       }
@@ -371,7 +371,7 @@ export function SimonSays() {
         const p = positions[i];
 
         // Effective brightness: the lingering flash, plus a proximity glow,
-        // plus a strong absorb-driven boost on the dot being selected — this
+        // plus a strong absorb-driven boost on the dot being selected. This
         // telegraphs the pending selection so the lock-in is never a surprise.
         const prox = Math.max(0, 1 - Math.hypot(cursor.x - p.x, cursor.y - p.y) / captureR);
         let f = d.flash;
@@ -407,7 +407,7 @@ export function SimonSays() {
         }
       }
 
-      // Expanding pulse rings (explicit radius/alpha — no trail overdraw).
+      // Expanding pulse rings (explicit radius/alpha, no trail overdraw).
       ctx.lineWidth = 2;
       for (let i = rings.length - 1; i >= 0; i--) {
         const ring = rings[i];
@@ -609,7 +609,7 @@ export function SimonSays() {
             <p className="mt-2 text-sm text-muted">
               Watch the glowing dots flash, then repeat the sequence from memory.
               Hover your absorption cursor over a dot until it pulls in to
-              select it — no clicking needed. The sequence grows each round.
+              select it, no clicking needed. The sequence grows each round.
             </p>
             <button
               onClick={startGame}
@@ -636,7 +636,7 @@ export function SimonSays() {
               {score === 0
                 ? "Everyone misfires on the first one. Try again."
                 : score < 5
-                  ? "A solid start — your memory is warming up."
+                  ? "A solid start. Your memory is warming up."
                   : score < 9
                     ? "Sharp recall. The sequence never stood a chance."
                     : "Elite memory. Are you even human?"}

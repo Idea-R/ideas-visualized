@@ -23,7 +23,7 @@ const TIERS = [
   {
     label: "Canvas 2D",
     title: "Hand-rolled particle systems",
-    body: "Crisp, pooled, audio-reactive particle craft — no engine, no ghosting.",
+    body: "Crisp, pooled, audio-reactive particle work with no engine and no canvas ghosting.",
     href: "/gallery/particle-constellation",
     cta: "Particle Constellation",
   },
@@ -37,7 +37,7 @@ const TIERS = [
   {
     label: "True WebGL",
     title: "React Three Fiber + bloom",
-    body: "Real 3D scenes you can orbit, zoom, and pan — instanced and glowing.",
+    body: "Real 3D scenes you can orbit, zoom, and pan, instanced and lit with bloom.",
     href: "/gallery/galaxy-spiral",
     cta: "Galaxy Spiral",
   },
@@ -72,8 +72,8 @@ export default function Home() {
             <span className="glow-text">how did they build that?</span>
           </h1>
           <p className="max-w-2xl text-base text-muted sm:text-lg">
-            A living showcase of {STATS[0].n} bespoke visual effects — built from
-            scratch, with no off-the-shelf engine. Tune every parameter live,
+            A living collection of {STATS[0].n} visual effects, built from
+            scratch without an off-the-shelf engine. Tune every parameter live,
             roll the dice, then export the code or an AI prompt.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
@@ -115,7 +115,7 @@ export default function Home() {
               Featured effects
             </h2>
             <p className="mt-1 text-sm text-muted">
-              Live previews — open any one to play with the controls.
+              Live previews. Open any one to play with the controls.
             </p>
           </div>
           <Link href="/gallery" className="text-sm text-muted hover:text-fg">
@@ -133,8 +133,9 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-5 pb-24">
         <h2 className="text-2xl font-bold tracking-tight">Three render tiers</h2>
         <p className="mt-1 max-w-2xl text-sm text-muted">
-          From hand-written Canvas 2D physics to real WebGL scenes — every effect
-          shares one module interface, so controls, presets, and export just work.
+          Every effect, whether hand-written Canvas 2D physics or a real WebGL
+          scene, shares one module interface, so the controls, presets, and
+          export all work the same way.
         </p>
         <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-3">
           {TIERS.map((t) => (
@@ -187,8 +188,8 @@ export default function Home() {
             </span>
             <h3 className="mt-3 text-xl font-semibold">How we built it</h3>
             <p className="mt-2 max-w-sm text-sm text-muted">
-              The techniques behind the effects — fixing canvas ghosting, object
-              pooling, and best practices for reactive, particle-heavy scenes.
+              The techniques behind the effects: how to fix canvas ghosting,
+              when to pool objects, and how to keep particle-heavy scenes fast.
             </p>
             <span className="mt-5 inline-block text-sm text-accent">
               Read the write-ups →

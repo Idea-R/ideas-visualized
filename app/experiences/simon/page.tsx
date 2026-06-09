@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SimonSays } from "@/components/games/SimonSays";
 
-export const metadata = { title: "Simon Says — Ideas Visualized" };
+export const metadata = { title: "Simon Says · Ideas Visualized" };
 
 export default function SimonPage() {
   return (

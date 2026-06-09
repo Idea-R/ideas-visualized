@@ -1,7 +1,7 @@
-# Best Practices for Real-Time Reactive Visual Effects
+# Best practices for real-time reactive visual effects
 
 Hard-won notes for building Canvas 2D / Web Audio effects and game VFX that stay
-**crisp** and **fast**, even when spawning thousands of short-lived elements.
+crisp and fast, even when spawning thousands of short-lived elements.
 This is the "how we built it / what we learned" reference for Ideas Visualized.
 
 ---
@@ -19,7 +19,7 @@ blur cheaply, they paint a semi-transparent background rectangle over the
 previous frame:
 
 ```js
-// Common trick — creates trails, but causes burn-in
+// Common trick, creates trails but causes burn-in
 ctx.fillStyle = "rgba(5, 6, 10, 0.12)";
 ctx.fillRect(0, 0, w, h);
 ```
@@ -30,10 +30,10 @@ Each frame, a pixel of color `C` becomes:
 newC = C * (1 - 0.12) + bg * 0.12
 ```
 
-The canvas stores **8 bits per channel** (0–255). Once `C` is within a few
-levels of `bg`, that multiply **rounds back to the same integer**, so the pixel
-never actually reaches the true background. The leftover 1–3 levels are a
-**permanent ghost**. Anything using `globalCompositeOperation = "lighter"`
+The canvas stores 8 bits per channel (0 to 255). Once `C` is within a few
+levels of `bg`, that multiply rounds back to the same integer, so the pixel
+never actually reaches the true background. The leftover 1 to 3 levels are a
+permanent ghost. Anything using `globalCompositeOperation = "lighter"`
 (additive) makes it worse, because it keeps *adding* brightness with no decay.
 
 > The "overlay I made to keep it fresh" = a periodic fully-opaque clear that
@@ -61,8 +61,8 @@ ctx.globalAlpha = 1;
 **B. Keep overdraw trails but make them honest.** If you want the cheap
 motion-blur look, accept that pure overdraw asymptotes. Mitigate by:
 - Using a higher fade alpha (≥ 0.2) so residual sits below perceptible levels.
-- Doing a **true clear** on a cadence (e.g. every Nth frame, or on resize /
-  scene change) — a built-in version of the "overlay reset."
+- Doing a true clear on a cadence (e.g. every Nth frame, or on resize /
+  scene change), a built-in version of the "overlay reset."
 - Never combining overdraw fade with `lighter` on the *persistent* layer.
 
 **C. Two-layer compositing.** A persistent "trail" canvas decayed deliberately,
@@ -71,7 +71,7 @@ bit more cost.
 
 ### Our default policy
 - Effects that don't need trails: **`clearRect` every frame.** (e.g. ambient
-  particle network — already ghost-free.)
+  particle network, already ghost-free.)
 - Effects that want trails: **full clear + explicit history-based trails**, with
   an optional `trail` control that adjusts history length, *not* fade-overdraw.
 - The shared canvas harness exposes a `clearMode` so this is correct by default.
@@ -82,15 +82,15 @@ bit more cost.
 
 ### The counter-intuitive part
 "If the objects still exist when pooled, how is that faster than deleting them?"
-Because the cost was never the objects sitting in memory — it was the
-**allocation and garbage collection churn**.
+Because the cost was never the objects sitting in memory. It was the
+allocation and garbage collection churn.
 
 ### What actually happens without pooling
 Spawning thousands of particles/enemies per second means thousands of `new`
 allocations per second. When they "die," they become garbage. The JS **garbage
 collector** must periodically stop your code, walk the heap, and free them.
 Those GC pauses land on random frames and show up as **stutter / dropped
-frames** — the worst kind of jank because it's unpredictable.
+frames**, the worst kind of jank because it's unpredictable.
 
 ### What pooling does
 Pre-allocate a fixed array of objects **once**. Track which are active. When one
@@ -156,7 +156,7 @@ and for dense particle finales.
 ### Throughput
 - **Batch draw calls**: group by color/blend mode, set `fillStyle` once, draw
   many. State changes (`shadowBlur`, gradients, `globalCompositeOperation`) are
-  expensive — minimize switches.
+  expensive, so minimize switches.
 - **Cull** anything off-screen before drawing.
 - **`shadowBlur` is costly.** Prefer pre-baked radial-gradient sprites for glow.
 - For heavy static sprites, **pre-render to an offscreen canvas** once and

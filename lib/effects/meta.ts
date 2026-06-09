@@ -570,7 +570,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "tilt-card",
     title: "3D Tilt Card",
     blurb:
-      "A perspective card that springs toward the cursor. Pick whether the text pushes out (raised), sinks into a divot, or sits flat — then choose how it reacts when you click the card.",
+      "A perspective card that springs toward the cursor. Pick whether the text pushes out (raised), sinks into a divot, or sits flat, then choose how it reacts when you click the card.",
     source: {
       project: "AllRoadsLeadToCursor",
       path: "ARLTC/allroadsleadtocursor/components/tilting-card.tsx",
@@ -631,7 +631,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "warp-field",
     title: "Warp Field",
     blurb:
-      "A 3D hyperspace starfield streaming from the center — steer the warp axis with your cursor and click to jump to lightspeed.",
+      "A 3D hyperspace starfield streaming from the center. Steer the warp axis with your cursor and click to jump to lightspeed.",
     source: {
       project: "AllRoadsLeadToCursor",
       path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
@@ -666,7 +666,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "shockwave-rings",
     title: "Shockwave Rings",
     blurb:
-      "Expanding polar-curve rings — rose, lemniscate, or circle — bloom and rotate from the center with a gradient stroke. Click to spawn a ring anywhere.",
+      "Expanding polar-curve rings (rose, lemniscate, or circle) bloom and rotate from the center with a gradient stroke. Click to spawn a ring anywhere.",
     source: {
       project: "AllRoadsLeadToCursor",
       path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
@@ -722,7 +722,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "particle-constellation",
     title: "Particle Constellation",
     blurb:
-      "Particles stream in from a screen edge and ease into a glowing geometric outline — triangle, hexagon, star, or spiral — then hold, pulse, and link up before scattering and re-forming. Click to jump to the next shape.",
+      "Particles stream in from a screen edge and ease into a glowing geometric outline (triangle, hexagon, star, or spiral), then hold, pulse, and link up before scattering and re-forming. Click to jump to the next shape.",
     source: {
       project: "AllRoadsLeadToCursor",
       path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
@@ -769,7 +769,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "comet-impact",
     title: "Comet Impact",
     blurb:
-      "A glowing comet spirals in from a screen edge and detonates on impact — a radial shockwave ring, a ring of converging energy particles, and a central flash. Auto-launches on a ramping cadence; click to call one down.",
+      "A glowing comet spirals in from a screen edge and detonates on impact with a radial shockwave ring, a ring of converging energy particles, and a central flash. Auto-launches on a ramping cadence; click to call one down.",
     source: {
       project: "AllRoadsLeadToCursor",
       path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
@@ -979,7 +979,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "spore-drift",
     title: "Spore Drift",
     blurb:
-      "Bioluminescent spores — drifters, trailing filaments, and orbiting clusters — float upward on gusting wind with soft glow, depth parallax, and faint connective filaments. Move the cursor to push the wind.",
+      "Bioluminescent spores (drifters, trailing filaments, and orbiting clusters) float upward on gusting wind with soft glow, depth parallax, and faint connective filaments. Move the cursor to push the wind.",
     source: {
       project: "IdeasRealized",
       path: "Site showcase/grand-showcase/src/showcases/neon-terrain/components/TerrainAnimations.tsx",
@@ -1049,7 +1049,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "particle-field",
     title: "Particle Field",
     blurb:
-      "Connected drifting motes with glowing proximity link lines and mouse repulsion — a clean, modern hero background.",
+      "Connected drifting motes with glowing proximity link lines and mouse repulsion. A clean, modern hero background.",
     source: {
       project: "IdeasRealized",
       path: "Site showcase/grand-showcase/src/components/gallery/ParticleField.tsx",
@@ -1084,7 +1084,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "abyss-plankton",
     title: "Abyss Plankton",
     blurb:
-      "Deep-sea bioluminescent plankton — soft pulsing motes drift upward through a dark abyssal gradient, glowing brighter as the cursor passes near.",
+      "Deep-sea bioluminescent plankton. Soft pulsing motes drift upward through a dark abyssal gradient and glow brighter as the cursor passes near.",
     source: {
       project: "IdeasRealized",
       path: "Site showcase/grand-showcase/src/showcases/bioluminescent/components/AbyssAnimations.tsx",
@@ -1296,7 +1296,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "ocean-wave",
     title: "Ocean Wave",
     blurb:
-      "A particle ocean of glowing dots riding stacked sine waves across the lower third of the canvas, bobbing and pulsing to an internal swell. No audio — the swell is driven by layered sine waves over time.",
+      "A particle ocean of glowing dots riding stacked sine waves across the lower third of the canvas, bobbing and pulsing to an internal swell. There is no audio; layered sine waves drive the swell over time.",
     source: {
       project: "AllRoadsLeadToCursor",
       path: "ARLTC/allroadsleadtocursor/components/pre-intro.tsx",
@@ -1366,7 +1366,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "infinite-starfield",
     title: "Infinite Starfield",
     blurb:
-      "A twinkling star canvas over a subtle perspective grid with gentle mouse-driven parallax — stars and grid shift slightly toward the pointer, nearer stars drifting more. Move your cursor to steer the depth.",
+      "A twinkling star canvas over a subtle perspective grid with gentle mouse-driven parallax. Stars and grid shift slightly toward the pointer, and nearer stars drift more. Move your cursor to steer the depth.",
     source: {
       project: "XPanywhere",
       path: "repo/src/components/landing/InfiniteCanvas.tsx",
@@ -1401,7 +1401,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "code-orbit",
     title: "Code Orbit",
     blurb:
-      "Floating monospace code tokens drift in gentle orbital motion with mouse-ripple physics — tokens are pushed away from the cursor and ease back to their orbits. Pure DOM with a self-managed rAF loop; honors reduced-motion.",
+      "Floating monospace code tokens drift in gentle orbital motion with mouse-ripple physics. Tokens are pushed away from the cursor and ease back to their orbits. Pure DOM with a self-managed rAF loop; honors reduced-motion.",
     source: {
       project: "VisualDomainTesting",
       path: "floating-code.js",
@@ -1506,7 +1506,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "depth-tunnel",
     title: "Depth Tunnel",
     blurb:
-      "A perspective recess illusion — concentric receding layers form a 3D tunnel that the cursor steers via parallax. Pure CSS transforms, five tunnel styles.",
+      "A perspective recess illusion. Concentric receding layers form a 3D tunnel that the cursor steers via parallax. Pure CSS transforms, five tunnel styles.",
     source: {
       project: "Custom-components (DepthCard)",
       path: "DepthCard/depthcard-demo/src/styles/variants.css",
@@ -1587,7 +1587,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "galaxy-spiral",
     title: "Galaxy Spiral",
     blurb:
-      "A procedurally generated spiral galaxy rendered as a real WebGL point cloud — thousands of stars sweeping along branching arms with a glowing two-tone core. Scroll to zoom and drag to orbit right into the disc.",
+      "A procedurally generated spiral galaxy rendered as a real WebGL point cloud, with thousands of stars sweeping along branching arms around a glowing two-tone core. Scroll to zoom and drag to orbit right into the disc.",
     source: { project: "Ideas Visualized", path: "components/effects/galaxy-spiral/index.tsx" },
     tags: ["3d", "webgl", "three.js", "r3f", "particles", "pointer"],
     tier: 1,
@@ -1625,7 +1625,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "warp-stars-3d",
     title: "Hyperdrive",
     blurb:
-      "A real 3D starfield you fly through — click and hold to punch into hyperdrive and stretch the stars into streaks as the field-of-view widens.",
+      "A real 3D starfield you fly through. Click and hold to punch into hyperdrive and stretch the stars into streaks as the field of view widens.",
     source: { project: "Ideas Visualized", path: "components/effects/warp-stars-3d/index.tsx" },
     tags: ["3d", "webgl", "three.js", "r3f", "stars", "click", "space"],
     tier: 1,
@@ -1648,7 +1648,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "wave-grid-3d",
     title: "Wave Grid",
     blurb:
-      "A rippling 3D wireframe terrain — layered sine waves graded by height, bulging toward your cursor.",
+      "A rippling 3D wireframe terrain of layered sine waves graded by height, bulging toward your cursor.",
     source: { project: "Ideas Visualized", path: "components/effects/wave-grid-3d/index.tsx" },
     tags: ["3d", "webgl", "three.js", "r3f", "wireframe", "terrain", "pointer"],
     tier: 1,
@@ -1671,7 +1671,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "torus-knot",
     title: "Torus Knot",
     blurb:
-      "A glowing, slowly morphing torus knot rendered in real WebGL — emissive under bloom, twisting and breathing under two palette-colored lights, with a faint wireframe knot behind it for depth.",
+      "A glowing, slowly morphing torus knot rendered in real WebGL. It glows under bloom and twists under two palette-colored lights, with a faint wireframe knot behind it for depth.",
     source: { project: "Ideas Visualized", path: "components/effects/torus-knot/index.tsx" },
     tags: ["3d", "webgl", "three.js", "r3f", "geometry", "glow"],
     tier: 1,
@@ -1717,7 +1717,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "charge-burst",
     title: "Charge Burst",
     blurb:
-      "Click and hold to gather energy, then release. Time the release at the peak (the flashing sweet-spot ring) for a max-power burst with shockwaves — overcharge too long and it goes unstable, scattering a weaker blast.",
+      "Click and hold to gather energy, then release. Time the release at the peak (the flashing sweet-spot ring) for a max-power burst with shockwaves. Overcharge too long and it goes unstable, scattering a weaker blast.",
     source: { project: "aVOID", path: "components/effects/charge-burst/index.tsx" },
     tags: ["Canvas 2D", "click", "charge", "hold", "particles", "pointer"],
     tier: 1,
@@ -1741,7 +1741,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "vortex-tree",
     title: "Vortex Tree",
     blurb:
-      "Hundreds of small 3D wireframe shapes spiral down a rotating funnel into a festive, galactic tree silhouette — crowned by a glowing star. Drag to orbit and scroll to zoom.",
+      "Hundreds of small 3D wireframe shapes spiral down a rotating funnel into a festive, galactic tree silhouette crowned by a glowing star. Drag to orbit and scroll to zoom.",
     source: { project: "Ideas Visualized", path: "components/effects/vortex-tree/index.tsx" },
     tags: ["3d", "webgl", "three.js", "r3f", "instanced", "festive"],
     tier: 1,
@@ -1827,7 +1827,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "flip-card",
     title: "Flip Card",
     blurb:
-      "A premium 3D card that tilts toward your cursor and flips between two faces. Pick the flip axis, trigger on click or hover, and label both sides.",
+      "A 3D card that tilts toward your cursor and flips between two faces. Pick the flip axis, trigger on click or hover, and label both sides.",
     source: { project: "Ideas Visualized", path: "components/effects/flip-card/index.tsx" },
     tags: ["CSS 3D", "pointer-reactive", "click", "card", "flip"],
     tier: 1,
@@ -1852,7 +1852,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "nexus-card",
     title: "Nexus Card",
     blurb:
-      "A premium asset card floating over a living NEXUS network — glowing nodes drift, link constellation-style, and wire themselves into the card and your cursor.",
+      "An asset card floating over a NEXUS network of glowing nodes that drift, link constellation-style, and wire themselves into the card and your cursor.",
     source: { project: "Ideas Visualized", path: "components/effects/nexus-card/index.tsx" },
     tags: ["Canvas 2D", "network", "pointer-reactive", "click", "card"],
     tier: 1,
@@ -1877,7 +1877,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "particle-morph",
     title: "Particle Morph",
     blurb:
-      "A point cloud of thousands of particles that smoothly morphs between a sphere, cube, torus, and cone on a loop — with a gentle idle swirl. Click to jump to the next shape.",
+      "A point cloud of thousands of particles that smoothly morphs between a sphere, cube, torus, and cone on a loop, with a gentle idle swirl. Click to jump to the next shape.",
     source: { project: "Ideas Visualized", path: "components/effects/particle-morph/index.tsx" },
     tags: ["3d", "webgl", "three.js", "r3f", "particles", "morph"],
     tier: 1,
@@ -1900,7 +1900,7 @@ export const effectsMeta: EffectMeta[] = [
     slug: "nebula-cloud",
     title: "Nebula Cloud",
     blurb:
-      "A volumetric, drifting nebula you can fly into — thousands of additive glowing points clustered into soft billowing clumps that swirl and breathe under bloom. Scroll to dive inside, drag to orbit, middle-drag to pan.",
+      "A volumetric, drifting nebula you can fly into, with thousands of additive glowing points clustered into soft billowing clumps that swirl and breathe under bloom. Scroll to dive inside, drag to orbit, middle-drag to pan.",
     source: { project: "Ideas Visualized", path: "components/effects/nebula-cloud/index.tsx" },
     tags: ["3d", "webgl", "three.js", "r3f", "particles", "space"],
     tier: 1,

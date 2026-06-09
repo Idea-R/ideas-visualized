@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { articles, sourceDocs } from "@/lib/research";
 
-export const metadata = { title: "Research — Ideas Visualized" };
+export const metadata = { title: "Research · Ideas Visualized" };
 
 export default function ResearchPage() {
   return (
     <main className="mx-auto max-w-6xl px-5 py-16">
       <h1 className="text-3xl font-bold tracking-tight">How we built it</h1>
       <p className="mt-2 max-w-2xl text-muted">
-        The craft behind the effects — our own research, technique writeups, and
-        performance notes from shipping bespoke, music-synced canvas work.
+        The work behind the effects: our own research, technique writeups, and
+        performance notes from building music-synced canvas work.
       </p>
 
       <h2 className="mt-12 text-sm font-semibold uppercase tracking-[0.2em] text-muted">

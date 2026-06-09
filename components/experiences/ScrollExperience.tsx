@@ -8,7 +8,7 @@ import { motion, useScroll, useTransform, type MotionValue } from "framer-motion
  * A self-contained "scroll experience": a sequence of full-height sections whose
  * layers are driven by scroll progress (parallax depth, zoom-on-scroll, lateral
  * drift, staggered text). Pure transform/opacity work via Framer Motion's
- * scroll-linked motion values — no scroll listeners, no layout thrash.
+ * scroll-linked motion values. No scroll listeners, no layout thrash.
  */
 export function ScrollExperience() {
   return (
@@ -91,7 +91,7 @@ function ParallaxHero() {
             Ideas in <span className="glow-text">Motion</span>
           </h1>
           <p className="mx-auto mt-5 max-w-md text-sm text-white/60">
-            Keep scrolling — depth, zoom, and drift all driven by where you are
+            Keep scrolling. Depth, zoom, and drift all driven by where you are
             on the page.
           </p>
           <div className="mt-8 animate-bounce text-white/40">↓</div>
@@ -128,8 +128,8 @@ function ZoomReveal() {
           <div className="panel relative max-w-md p-10 text-center">
             <h2 className="text-3xl font-bold tracking-tight">Zoom on scroll</h2>
             <p className="mt-3 text-sm text-muted">
-              This panel scales through the viewport as you pass it — the same
-              progress value drives the orbiting rings.
+              This panel scales through the viewport as you pass it, and the
+              same progress value drives the orbiting rings.
             </p>
           </div>
         </motion.div>
@@ -243,7 +243,7 @@ function FinaleWord({
   );
 }
 
-/** A scattered, deterministic star field (SSR-stable — no Math.random in render). */
+/** A scattered, deterministic star field (SSR-stable, no Math.random in render). */
 function Stars({ count }: { count: number }) {
   const stars = Array.from({ length: count }, (_, i) => {
     const a = (i * 73) % 100;

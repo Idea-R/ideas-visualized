@@ -32,7 +32,7 @@ export function toPrompt(meta: EffectMeta, params: EffectProps): string {
     ``,
     `Requirements:`,
     `- Use requestAnimationFrame with a delta-time (dt) step, clamped to avoid jumps on tab switches.`,
-    `- Render crisply: fully clear the canvas every frame (clearRect). Do NOT fake motion blur by painting a translucent background each frame — that causes permanent 8-bit "ghost" burn-in. If trails are wanted, store each particle's recent positions and draw them as an explicit fading tail.`,
+    `- Render crisply: fully clear the canvas every frame (clearRect). Do NOT fake motion blur by painting a translucent background each frame, because that causes permanent 8-bit "ghost" burn-in. If you want trails, store each particle's recent positions and draw them as an explicit fading tail.`,
     `- If many short-lived particles are spawned, use an object pool (pre-allocate, reuse, swap-remove on death) to avoid GC pauses.`,
     `- Scale the backing store by devicePixelRatio (cap ~2) and handle resize.`,
     `- Pause when the tab is hidden or the canvas is off-screen; respect prefers-reduced-motion.`,
@@ -50,7 +50,7 @@ export function toComponentSource(meta: EffectMeta, params: EffectProps): string
 
   return `"use client";
 
-// "${meta.title}" — exported from Ideas Visualized.
+// "${meta.title}" exported from Ideas Visualized.
 // Source effect: ${meta.source.project} (${meta.source.path})
 //
 // Crisp by default: this harness fully clears each frame (no ghosting/burn-in).
@@ -92,7 +92,7 @@ export function ${compName}(props: Partial<typeof DEFAULTS> = {}) {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
 
-      // Crisp full clear — no burn-in.
+      // Crisp full clear, no burn-in.
       ctx.clearRect(0, 0, w, h);
 
       // TODO: port the draw loop for "${meta.title}" here, using \`params\`,

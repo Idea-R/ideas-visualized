@@ -4,7 +4,7 @@
 
 ### Effects that make people ask *"how did they build that?"*
 
-**An interactive showcase of 57 bespoke visual effects — Canvas 2D, pseudo-3D, and true WebGL — each one live-controllable, randomizable, and exportable.**
+**57 interactive visual effects across three render tiers: Canvas 2D, pseudo-3D, and true WebGL. Every one is live-controllable, randomizable, and exportable.**
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-ideas--visualized.vercel.app-7c5cff?style=for-the-badge)](https://ideas-visualized.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-18e0d8?style=for-the-badge)](./LICENSE)
@@ -15,7 +15,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-0b1120?logo=tailwindcss&logoColor=38bdf8)
 ![Deployed on Vercel](https://img.shields.io/badge/Vercel-deployed-000?logo=vercel&logoColor=white)
 
-[**🔗 Open the live demo →**](https://ideas-visualized.vercel.app)
+[**Open the live demo →**](https://ideas-visualized.vercel.app)
 
 ![Ideas Visualized landing](docs/screenshots/landing.png)
 
@@ -25,15 +25,15 @@
 
 ## Why this exists
 
-Inspired by [wawa-vfx](https://github.com/wass08/wawa-vfx), but **stepped up**. Instead of one page of generic R3F particle tiles, every effect here is a hand-rolled, parameterized module with:
+Inspired by [wawa-vfx](https://github.com/wass08/wawa-vfx). Instead of a single page of R3F particle tiles, every effect here is a hand-written, parameterized module with:
 
-- **Live controls** — sliders, toggles, selects, color pickers, text inputs (with conditional visibility).
-- **Single / Dual / Rainbow** color modes on a unified palette system.
-- **Curated presets** + a **🎲 randomize** button (or press `R`), plus a global "Surprise me."
-- **Code export** — generate an AI prompt to recreate the look, *or* copy a self-contained React component.
-- **Expand / fullscreen** for any effect.
+- Live controls: sliders, toggles, selects, color pickers, and text inputs, with conditional visibility.
+- Single, Dual, and Rainbow color modes on one shared palette system.
+- Curated presets and a randomize button (or press `R`), plus a global "Surprise me."
+- Code export: generate an AI prompt that recreates the look, or copy a self-contained React component.
+- Expand any effect to fullscreen.
 
-No off-the-shelf engine. The craft is in the hand-written particle physics, object pooling, culling, and audio→visual mapping.
+There is no off-the-shelf engine. The work is in the hand-written particle physics, object pooling, culling, and audio-to-visual mapping.
 
 ## The gallery
 
@@ -51,22 +51,22 @@ All WebGL scenes support **orbit / scroll-to-zoom / pan** camera control with bl
 
 <div align="center">
 
-![Galaxy Spiral — true WebGL](docs/screenshots/galaxy.png)
+![Galaxy Spiral, a true WebGL scene](docs/screenshots/galaxy.png)
 
 </div>
 
 ## Built for performance
 
-- **No ghosting by default** — a crisp `clearMode: "full"` harness; motion trails are drawn explicitly rather than via accumulating fades (which asymptote due to 8-bit rounding).
-- **Object pooling** — particle-heavy effects reuse instances instead of allocating/GC-ing per frame.
-- **Off-screen pause** — `IntersectionObserver` halts the render loop when an effect scrolls out of view; tab-visibility aware.
-- **DPR-capped + delta-timed** — sharp on retina, frame-rate-independent motion.
-- **Reduced-motion aware** — respects `prefers-reduced-motion`.
+- No ghosting by default. The harness uses a crisp `clearMode: "full"`, and motion trails are drawn explicitly instead of by accumulating fades (those never fully clear because of 8-bit rounding).
+- Object pooling: particle-heavy effects reuse instances instead of allocating and garbage-collecting every frame.
+- Off-screen pause: an `IntersectionObserver` stops the render loop when an effect scrolls out of view, and it also pauses on tab switches.
+- DPR-capped and delta-timed: sharp on retina displays, with motion that stays frame-rate independent.
+- Reduced-motion aware: it respects `prefers-reduced-motion`.
 
 ## Beyond the gallery
 
-- **Experiences** — *Simon Says*, a memory game driven by the custom **absorption cursor**, and *Ideas in Motion*, a scroll-driven parallax journey.
-- **Research** — write-ups on the techniques: fixing canvas ghosting, object pooling, and best practices for reactive, particle-heavy scenes.
+- Experiences: Simon Says, a memory game driven by the custom absorption cursor, and Ideas in Motion, a scroll-driven parallax journey.
+- Research: write-ups on the techniques, including how to fix canvas ghosting, when to pool objects, and how to keep particle-heavy scenes fast.
 
 ## Tech stack
 
@@ -103,6 +103,14 @@ docs/                    Catalog, plan, roadmap, research notes
 3. Register the component by slug in `components/effects/registry.tsx`.
 
 The gallery, detail page, controls, presets, randomize, and export all wire up automatically.
+
+## Connect
+
+Built by [Ideas Realized](https://ideas-realized.com). If this helped or gave you ideas, a star on the repo is appreciated.
+
+- Main site: [ideas-realized.com](https://ideas-realized.com)
+- LinkedIn: [in/ideasrealized](https://www.linkedin.com/in/ideasrealized)
+- X: [@xentrilo](https://x.com/xentrilo)
 
 ## License
 

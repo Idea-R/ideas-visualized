@@ -2,7 +2,7 @@ import { effectsMeta } from "@/lib/effects/meta";
 import { EffectCard } from "@/components/EffectCard";
 import { SurpriseButton } from "@/components/SurpriseButton";
 
-export const metadata = { title: "Gallery — Ideas Visualized" };
+export const metadata = { title: "Gallery · Ideas Visualized" };
 
 export default function GalleryPage() {
   return (
