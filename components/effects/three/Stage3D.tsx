@@ -28,6 +28,7 @@ export function Stage3D({
   className,
   orbit = true,
   zoom = true,
+  pan = true,
   autoRotate = false,
   minDistance = 1.5,
   maxDistance = 60,
@@ -45,6 +46,8 @@ export function Stage3D({
   orbit?: boolean;
   /** Allow scroll/pinch zoom (independent of rotate). */
   zoom?: boolean;
+  /** Allow panning the look-at target (middle / right drag, two-finger). */
+  pan?: boolean;
   autoRotate?: boolean;
   minDistance?: number;
   maxDistance?: number;
@@ -73,7 +76,7 @@ export function Stage3D({
     return () => io.disconnect();
   }, []);
 
-  const controlsOn = orbit || zoom;
+  const controlsOn = orbit || zoom || pan;
 
   return (
     <div
@@ -99,17 +102,28 @@ export function Stage3D({
           {controlsOn && (
             <OrbitControls
               makeDefault
-              enablePan={false}
+              enablePan={pan}
               enableRotate={orbit}
               enableZoom={zoom}
               enableDamping
               dampingFactor={0.08}
               rotateSpeed={0.6}
               zoomSpeed={0.9}
+              panSpeed={0.8}
+              screenSpacePanning
               autoRotate={autoRotate}
               autoRotateSpeed={0.6}
               minDistance={minDistance}
               maxDistance={maxDistance}
+              mouseButtons={{
+                LEFT: orbit ? THREE.MOUSE.ROTATE : THREE.MOUSE.PAN,
+                MIDDLE: pan ? THREE.MOUSE.PAN : THREE.MOUSE.DOLLY,
+                RIGHT: pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE,
+              }}
+              touches={{
+                ONE: orbit ? THREE.TOUCH.ROTATE : THREE.TOUCH.PAN,
+                TWO: THREE.TOUCH.DOLLY_PAN,
+              }}
             />
           )}
           {bloom && (
@@ -126,7 +140,13 @@ export function Stage3D({
       )}
       {controlsOn && hint && (
         <div className="pointer-events-none absolute bottom-3 left-3 z-10 rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[10px] font-medium text-white/55 backdrop-blur">
-          {orbit ? "scroll to zoom · drag to orbit" : "scroll to zoom"}
+          {[
+            orbit ? "drag to orbit" : null,
+            zoom ? "scroll to zoom" : null,
+            pan ? "middle / right-drag to pan" : null,
+          ]
+            .filter(Boolean)
+            .join(" · ")}
         </div>
       )}
     </div>

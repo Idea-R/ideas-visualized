@@ -170,7 +170,7 @@ function Scene({ params }: { params: EffectProps }) {
 
 export function WarpStars3D({ params }: { params: EffectProps }) {
   return (
-    <Stage3D camera={{ position: [0, 0, 0], fov: BASE_FOV }} orbit={false} zoom={false}>
+    <Stage3D camera={{ position: [0, 0, 0], fov: BASE_FOV }} orbit={false} zoom={false} pan={false}>
       <Scene params={params} />
     </Stage3D>
   );
