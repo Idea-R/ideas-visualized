@@ -1,0 +1,1744 @@
+import type { EffectMeta } from "./types";
+
+/**
+ * Central, server-safe metadata for every effect. The matching React component
+ * is wired up by slug in `components/effects/registry.tsx` (client-only).
+ */
+export const effectsMeta: EffectMeta[] = [
+  {
+    slug: "cursor-attractor",
+    title: "Cursor Attractor",
+    blurb:
+      "Particles emit from your cursor and are pulled toward (or pushed from) the center with additive glow trails. Click to burst.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/cursor-attractor.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "pointer-reactive", "click", "pooled"],
+    tier: 1,
+    controls: [
+      {
+        key: "mode",
+        label: "Force",
+        type: "select",
+        options: [
+          { label: "Attract", value: "attract" },
+          { label: "Repel", value: "repel" },
+        ],
+        default: "attract",
+      },
+      { key: "gravity", label: "Force strength", type: "range", min: 0.1, max: 3, step: 0.1, default: 1 },
+      { key: "emitRate", label: "Emit rate", type: "range", min: 0, max: 8, step: 1, default: 2 },
+      { key: "trail", label: "Trail length", type: "range", min: 0, max: 24, step: 1, default: 12 },
+    ],
+    presets: [
+      { name: "Calm", params: { mode: "attract", gravity: 0.5, emitRate: 1, trail: 16 } },
+      { name: "Vortex", params: { mode: "attract", gravity: 2.4, emitRate: 4, trail: 20 } },
+      { name: "Repulsor", params: { mode: "repel", gravity: 1.8, emitRate: 3, trail: 8 } },
+    ],
+  },
+  {
+    slug: "custom-cursor",
+    title: "Custom Cursor Trail",
+    blurb:
+      "Hides the native cursor and replaces it with a smoothed glowing head plus an explicit fading comet tail. Idle-fades when still.",
+    source: {
+      project: "aVOID",
+      path: "apps/game-hub/src/components/CustomCursor.tsx",
+    },
+    tags: ["Canvas 2D", "pointer-reactive", "cursor"],
+    tier: 1,
+    controls: [
+      { key: "trail", label: "Trail length", type: "range", min: 4, max: 40, step: 1, default: 18 },
+      { key: "size", label: "Head size", type: "range", min: 4, max: 24, step: 1, default: 10 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 270 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "glow", label: "Glow", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Comet", params: { trail: 34, size: 12, colorMode: "single", hue: 280, glow: true } },
+      { name: "Rainbow Trail", params: { trail: 30, size: 12, colorMode: "rainbow", hue: 270, glow: true } },
+      { name: "Neon", params: { trail: 22, size: 14, hue: 320, glow: true } },
+    ],
+  },
+  {
+    slug: "absorption-cursor",
+    title: "Absorption Cursor",
+    blurb:
+      "A pulsing cursor that shrinks and gets absorbed by nearby target nodes, emitting expanding pulse rings as it's captured.",
+    source: {
+      project: "aVOID",
+      path: "games/void-avoid/src/game/systems/CursorSystem.ts",
+    },
+    tags: ["Canvas 2D", "pointer-reactive", "cursor", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "targets", label: "Targets", type: "range", min: 2, max: 8, step: 1, default: 4 },
+      { key: "glowIntensity", label: "Glow", type: "range", min: 0.3, max: 2, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 320, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "rings", label: "Pulse rings", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Calm", params: { targets: 3, glowIntensity: 0.7, hue: 190, rings: true } },
+      { name: "Spectrum", params: { targets: 6, glowIntensity: 1.2, colorMode: "rainbow", hue: 190, rings: true } },
+      { name: "Magenta", params: { targets: 5, glowIntensity: 1.2, hue: 310, rings: true } },
+    ],
+  },
+  {
+    slug: "matrix-rain",
+    title: "Matrix Rain + Spotlight",
+    blurb:
+      "Falling glyph rain with a crisp fading tail and a cursor-driven spotlight that brightens nearby characters.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/matrix-effect.tsx",
+    },
+    tags: ["Canvas 2D", "pointer-reactive"],
+    tier: 1,
+    controls: [
+      { key: "fontSize", label: "Glyph size", type: "range", min: 10, max: 28, step: 1, default: 16 },
+      { key: "speed", label: "Fall speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "tail", label: "Tail length", type: "range", min: 3, max: 30, step: 1, default: 14 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 150 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 185, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "spotlight", label: "Cursor spotlight", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Classic Green", params: { hue: 150, speed: 1, tail: 14, fontSize: 16 } },
+      { name: "Spectrum Rain", params: { hue: 200, colorMode: "rainbow", speed: 1.2, tail: 18, fontSize: 15 } },
+      { name: "Ember", params: { hue: 24, speed: 0.7, tail: 10, fontSize: 18 } },
+    ],
+  },
+  {
+    slug: "lightning-strike",
+    title: "Lightning Strike",
+    blurb:
+      "Jagged branching bolts arc from an edge to your click with a white-hot core, colored glow, and pooled sparks. Click to strike.",
+    source: {
+      project: "aVOID",
+      path: "games/wreck-avoid/src/game/renderers/EffectsRenderer.ts",
+    },
+    tags: ["Canvas 2D", "click", "pooled", "lightning"],
+    tier: 1,
+    controls: [
+      { key: "branches", label: "Branches", type: "range", min: 0, max: 5, step: 1, default: 2 },
+      { key: "jitter", label: "Jitter", type: "range", min: 4, max: 40, step: 1, default: 16 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "auto", label: "Auto-strike", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Storm", params: { branches: 3, jitter: 22, hue: 210, auto: true } },
+      { name: "Rainbow Bolt", params: { branches: 3, jitter: 20, colorMode: "rainbow", hue: 200, auto: true } },
+      { name: "Plasma", params: { branches: 2, jitter: 30, hue: 285, auto: true } },
+    ],
+  },
+  {
+    slug: "confetti-burst",
+    title: "Confetti Burst",
+    blurb:
+      "A shockwave ring plus pooled rect/triangle/ellipse confetti with gravity, wind drift, and spin. Click to launch.",
+    source: {
+      project: "allroadsleadtolovable",
+      path: "components/experience/visual-stage.tsx",
+    },
+    tags: ["Canvas 2D", "click", "particles", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Count", type: "range", min: 20, max: 200, step: 10, default: 80 },
+      { key: "gravity", label: "Gravity", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "spread", label: "Spread", type: "range", min: 1, max: 12, step: 1, default: 6 },
+      { key: "ring", label: "Shockwave ring", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Party", params: { count: 120, gravity: 1, spread: 8, ring: true } },
+      { name: "Fireworks", params: { count: 200, gravity: 0.4, spread: 11, ring: true } },
+      { name: "Gentle", params: { count: 50, gravity: 1.4, spread: 4, ring: false } },
+    ],
+  },
+  {
+    slug: "borg-click",
+    title: "Borg Geometric Click",
+    blurb:
+      "An expanding 'assimilation' grid of concentric polygons, radiating segments, and vertex nodes with a counter-spinning core. Click anywhere.",
+    source: {
+      project: "1shotCRM",
+      path: "components/AudioCanvasMode.tsx",
+    },
+    tags: ["Canvas 2D", "click", "geometric", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "segments", label: "Segments", type: "range", min: 6, max: 18, step: 1, default: 12 },
+      { key: "rings", label: "Rings", type: "range", min: 2, max: 6, step: 1, default: 4 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 130 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "spin", label: "Spin", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+    ],
+    presets: [
+      { name: "Assimilate", params: { segments: 12, rings: 4, hue: 130, spin: 1 } },
+      { name: "Prism Grid", params: { segments: 14, rings: 5, colorMode: "rainbow", hue: 130, spin: 0.8 } },
+      { name: "Amber", params: { segments: 8, rings: 3, hue: 38, spin: 1.6 } },
+    ],
+  },
+  {
+    slug: "ambient-particles",
+    title: "Ambient Particle Network",
+    blurb:
+      "A drifting field of glowing nodes connected by proximity lines that reacts to your cursor. Great as a global background.",
+    source: {
+      project: "1shotCRM",
+      path: "components/InteractiveCanvas.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "pointer-reactive", "background"],
+    tier: 1,
+    controls: [
+      {
+        key: "mode",
+        label: "Cursor",
+        type: "select",
+        options: [
+          { label: "Repel", value: "repel" },
+          { label: "Attract", value: "attract" },
+        ],
+        default: "repel",
+      },
+      { key: "density", label: "Density", type: "range", min: 0.5, max: 3, step: 0.1, default: 1.2 },
+      { key: "linkDist", label: "Link distance", type: "range", min: 60, max: 220, step: 5, default: 140 },
+      { key: "force", label: "Cursor force", type: "range", min: 0, max: 6, step: 0.5, default: 2 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Constellation", params: { mode: "repel", density: 1, linkDist: 160, force: 2 } },
+      { name: "Aurora", params: { mode: "repel", density: 1.4, linkDist: 170, force: 2, colorMode: "rainbow", hue: 200, hue2: 280 } },
+      { name: "Gather", params: { mode: "attract", density: 1.4, linkDist: 180, force: 3 } },
+    ],
+  },
+  {
+    slug: "glitch-text",
+    title: "Glitch Text Resolve",
+    blurb:
+      "Random-character scramble that resolves into the target text, then keeps an RGB-split shadow glitch that re-corrupts on a loop.",
+    source: {
+      project: "1shotCRM",
+      path: "components/audio-visualization/GlitchyText.tsx",
+    },
+    tags: ["CSS", "DOM", "text", "RGB-split", "animation"],
+    tier: 1,
+    controls: [
+      { key: "speed", label: "Speed", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "intensity", label: "Intensity", type: "range", min: 0, max: 1, step: 0.05, default: 0.6 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      { key: "scramble", label: "Scramble in", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Terminal", params: { speed: 1, intensity: 0.5, hue: 135, scramble: true } },
+      { name: "Heavy", params: { speed: 1.8, intensity: 1, hue: 320, scramble: true } },
+      { name: "Subtle", params: { speed: 0.6, intensity: 0.2, hue: 210, scramble: false } },
+    ],
+  },
+  {
+    slug: "neon-button",
+    title: "Neon Button",
+    blurb:
+      "A glowing neon button with a pulsing blurred gradient underlay, spring hover/tap feedback, and a sheen sweep.",
+    source: {
+      project: "aVOID",
+      path: "games/word-avoid/src/components/ui/NeonButton.tsx",
+    },
+    tags: ["CSS", "DOM", "UI", "pointer-reactive"],
+    tier: 1,
+    controls: [
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 285 },
+      { key: "pulse", label: "Pulse", type: "range", min: 0, max: 2, step: 0.1, default: 1 },
+      { key: "glow", label: "Glow", type: "range", min: 0, max: 1, step: 0.05, default: 0.7 },
+      {
+        key: "label",
+        label: "Label",
+        type: "select",
+        options: [
+          { label: "LAUNCH", value: "LAUNCH" },
+          { label: "ENGAGE", value: "ENGAGE" },
+          { label: "START", value: "START" },
+          { label: "INITIALIZE", value: "INITIALIZE" },
+        ],
+        default: "LAUNCH",
+      },
+    ],
+    presets: [
+      { name: "Cyber", params: { hue: 285, pulse: 1, glow: 0.7, label: "LAUNCH" } },
+      { name: "Magma", params: { hue: 18, pulse: 1.4, glow: 0.9, label: "ENGAGE" } },
+      { name: "Ice", params: { hue: 195, pulse: 0.6, glow: 0.5, label: "START" } },
+    ],
+  },
+  {
+    slug: "cyberpunk-hud",
+    title: "Cyberpunk Score HUD",
+    blurb:
+      "A futuristic score readout that counts up with a glitch flash on threshold crossings, animated circuit/scanline background, and a glowing frame.",
+    source: {
+      project: "aVOID",
+      path: "games/void-avoid/src/components/CyberpunkScoreDisplay.tsx",
+    },
+    tags: ["CSS", "DOM", "UI", "HUD"],
+    tier: 1,
+    controls: [
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 165 },
+      { key: "speed", label: "Count speed", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "glow", label: "Glow", type: "range", min: 0, max: 1, step: 0.05, default: 0.7 },
+      { key: "scanlines", label: "Scanlines", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Matrix", params: { hue: 135, speed: 1, scanlines: true, glow: 0.7 } },
+      { name: "Synthwave", params: { hue: 300, speed: 1.6, scanlines: true, glow: 0.9 } },
+      { name: "Alert", params: { hue: 0, speed: 2.2, scanlines: true, glow: 1 } },
+    ],
+  },
+  {
+    slug: "nova-burst",
+    title: "Nova Burst",
+    blurb:
+      "A center-screen supernova: radial glowing dots plus spinning wireframe shards explode outward and fade. Auto-fires; click to detonate at the cursor.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "explosion", "click", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "density", label: "Dots", type: "range", min: 60, max: 400, step: 10, default: 240 },
+      { key: "shards", label: "Shards", type: "range", min: 0, max: 60, step: 2, default: 36 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "auto", label: "Auto-fire", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Supernova", params: { density: 320, shards: 48, colorMode: "single", hue: 190, auto: true } },
+      { name: "Cyan/Magenta", params: { density: 240, shards: 32, colorMode: "dual", hue: 190, hue2: 320, auto: true } },
+      { name: "Rainbow", params: { density: 340, shards: 40, colorMode: "rainbow", hue: 190, auto: true } },
+    ],
+  },
+  {
+    slug: "geometric-bomb",
+    title: "Geometric Bomb",
+    blurb:
+      "Click to detonate a cluster of spinning wireframe shards that blast outward, tumble under gravity, and fade. Idle auto-detonations keep it alive.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "explosion", "click", "geometric", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Shards", type: "range", min: 8, max: 60, step: 2, default: 24 },
+      { key: "power", label: "Power", type: "range", min: 100, max: 500, step: 10, default: 280 },
+      { key: "gravity", label: "Gravity", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 30 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 50, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Debris", params: { count: 24, power: 260, gravity: 1.2, colorMode: "single", hue: 30 } },
+      { name: "Fire & Gold", params: { count: 40, power: 360, gravity: 1, colorMode: "dual", hue: 16, hue2: 48 } },
+      { name: "Prism", params: { count: 48, power: 420, gravity: 0.7, colorMode: "rainbow", hue: 30 } },
+    ],
+  },
+  {
+    slug: "corner-fireworks",
+    title: "Corner Fireworks",
+    blurb:
+      "Fountain cannons in the corners arc glowing sparks inward to a synthetic beat, with geometric shape bursts on peaks. Click for a celebratory burst.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "fireworks", "particles", "click", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "intensity", label: "Intensity", type: "range", min: 0.2, max: 2, step: 0.1, default: 1 },
+      { key: "gravity", label: "Gravity", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      {
+        key: "corners",
+        label: "Corners",
+        type: "select",
+        options: [
+          { label: "All four", value: "all" },
+          { label: "Bottom only", value: "bottom" },
+          { label: "Top only", value: "top" },
+        ],
+        default: "all",
+      },
+      { key: "shapes", label: "Shape bursts", type: "toggle", default: true },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 300 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 100, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Celebration", params: { intensity: 1.3, gravity: 1, corners: "all", shapes: true, hue: 300 } },
+      { name: "Rainbow Show", params: { intensity: 1.4, gravity: 1, corners: "all", shapes: true, colorMode: "rainbow", hue: 300 } },
+      { name: "Calm", params: { intensity: 0.6, gravity: 1.2, corners: "all", shapes: false, hue: 200 } },
+    ],
+  },
+  {
+    slug: "particle-text",
+    title: "Particle Text",
+    blurb:
+      "Glowing particles rain down and ease into a word, hold, then scatter and re-form on a loop. Click to re-form instantly.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "text", "particles", "typography", "glow"],
+    tier: 1,
+    controls: [
+      {
+        key: "word",
+        label: "Text",
+        type: "text",
+        maxLength: 24,
+        placeholder: "Type a word…",
+        default: "IDEAS",
+      },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Glow (single hue)", value: "glow" },
+          { label: "Rainbow", value: "rainbow" },
+          { label: "Gradient", value: "gradient" },
+          { label: "Mono (white)", value: "mono" },
+        ],
+        default: "glow",
+      },
+      { key: "density", label: "Density", type: "range", min: 2, max: 6, step: 1, default: 3 },
+      { key: "speed", label: "Formation speed", type: "range", min: 0.3, max: 2, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+    ],
+    presets: [
+      { name: "Ideas", params: { word: "IDEAS", colorMode: "glow", density: 3, speed: 1, hue: 190 } },
+      { name: "Rainbow", params: { word: "VISUALIZED", colorMode: "rainbow", density: 3, speed: 1, hue: 190 } },
+      { name: "Star Wars", params: { word: "STAR WARS", colorMode: "gradient", density: 3, speed: 1.2, hue: 50 } },
+      { name: "Cursor", params: { word: "CURSOR", colorMode: "mono", density: 2, speed: 0.9, hue: 300 } },
+    ],
+  },
+  {
+    slug: "pinwheel-rays",
+    title: "Pinwheel Rays",
+    blurb:
+      "A rotating radial burst of wobbling beams that shoot from the center and fade, additively blended. Auto re-bursts; click to fire from the cursor.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "rays", "radial", "burst", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "rays", label: "Rays", type: "range", min: 20, max: 160, step: 10, default: 100 },
+      { key: "speed", label: "Grow speed", type: "range", min: 200, max: 1400, step: 50, default: 900 },
+      { key: "spin", label: "Spin speed", type: "range", min: 0, max: 3, step: 0.05, default: 0.35 },
+      {
+        key: "spinDir",
+        label: "Spin direction",
+        type: "select",
+        options: [
+          { label: "Clockwise", value: "cw" },
+          { label: "Counter-clockwise", value: "ccw" },
+        ],
+        default: "cw",
+      },
+      { key: "wobble", label: "Wobble", type: "range", min: 0, max: 1, step: 0.05, default: 0.4 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 330, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Radar", params: { rays: 80, speed: 700, spin: 0.5, spinDir: "cw", wobble: 0.25, hue: 190 } },
+      { name: "Prism Wheel", params: { rays: 140, speed: 1000, spin: 0.6, spinDir: "cw", wobble: 0.4, colorMode: "rainbow", hue: 280 } },
+      { name: "Hypnotic", params: { rays: 120, speed: 600, spin: 1.4, spinDir: "ccw", wobble: 0.8, hue: 300 } },
+    ],
+  },
+  {
+    slug: "tilt-card",
+    title: "3D Tilt Card",
+    blurb:
+      "A perspective card that springs toward the cursor. Pick whether the text pushes out (raised), sinks into a divot, or sits flat — then choose how it reacts when you click the card.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/tilting-card.tsx",
+    },
+    tags: ["CSS", "DOM", "pointer-reactive", "3D", "click"],
+    tier: 1,
+    controls: [
+      { key: "maxTilt", label: "Max tilt", type: "range", min: 4, max: 30, step: 1, default: 16 },
+      {
+        key: "depth",
+        label: "Depth",
+        type: "select",
+        options: [
+          { label: "Raised (push out)", value: "raised" },
+          { label: "Sunken (divot)", value: "sunken" },
+          { label: "Flat", value: "flat" },
+        ],
+        default: "raised",
+      },
+      {
+        key: "click",
+        label: "On click",
+        type: "select",
+        options: [
+          { label: "Bounce", value: "bounce" },
+          { label: "Distort text", value: "distort" },
+          { label: "Recede (press in)", value: "recede" },
+          { label: "Shuffle text", value: "shuffle" },
+          { label: "Shift card", value: "shift" },
+          { label: "Flip card", value: "flip" },
+          { label: "None", value: "none" },
+        ],
+        default: "bounce",
+      },
+      { key: "glare", label: "Glare", type: "range", min: 0, max: 1, step: 0.05, default: 0.5 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 250 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 320, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Pop Out", params: { maxTilt: 18, depth: "raised", click: "bounce", glare: 0.6, hue: 250 } },
+      { name: "Duotone", params: { maxTilt: 18, depth: "raised", click: "bounce", glare: 0.6, colorMode: "dual", hue: 250, hue2: 320 } },
+      { name: "Glitch", params: { maxTilt: 22, depth: "raised", click: "distort", glare: 0.7, hue: 300 } },
+      { name: "Flipper", params: { maxTilt: 14, depth: "flat", click: "flip", glare: 0.5, hue: 190 } },
+    ],
+  },
+  {
+    slug: "warp-field",
+    title: "Warp Field",
+    blurb:
+      "A 3D hyperspace starfield streaming from the center — steer the warp axis with your cursor and click to jump to lightspeed.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "starfield", "3D", "pointer-reactive", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Stars", type: "range", min: 200, max: 2000, step: 50, default: 800 },
+      { key: "speed", label: "Warp speed", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 210 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "streaks", label: "Streaks", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Hyperspace", params: { count: 1200, speed: 1.6, hue: 210, streaks: true } },
+      { name: "Aurora Warp", params: { count: 1000, speed: 1.2, colorMode: "rainbow", hue: 210, streaks: true } },
+      { name: "Red Alert", params: { count: 1000, speed: 2.2, hue: 0, streaks: true } },
+    ],
+  },
+  {
+    slug: "shockwave-rings",
+    title: "Shockwave Rings",
+    blurb:
+      "Expanding polar-curve rings — rose, lemniscate, or circle — bloom and rotate from the center with a gradient stroke. Click to spawn a ring anywhere.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "geometric", "rings", "additive", "click"],
+    tier: 1,
+    controls: [
+      {
+        key: "shape",
+        label: "Shape",
+        type: "select",
+        options: [
+          { label: "Rose", value: "rose" },
+          { label: "Lemniscate", value: "lemniscate" },
+          { label: "Circle", value: "circle" },
+        ],
+        default: "rose",
+      },
+      { key: "petals", label: "Petals", type: "range", min: 2, max: 10, step: 1, default: 5 },
+      { key: "speed", label: "Expansion", type: "range", min: 100, max: 600, step: 10, default: 260 },
+      { key: "spin", label: "Spin speed", type: "range", min: 0, max: 3, step: 0.05, default: 0.6 },
+      {
+        key: "spinDir",
+        label: "Spin direction",
+        type: "select",
+        options: [
+          { label: "Clockwise", value: "cw" },
+          { label: "Counter-clockwise", value: "ccw" },
+        ],
+        default: "cw",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Bloom", params: { shape: "rose", petals: 5, speed: 260, spin: 0.6, spinDir: "cw", hue: 190 } },
+      { name: "Prismwave", params: { shape: "rose", petals: 6, speed: 300, spin: 0.8, spinDir: "cw", colorMode: "rainbow", hue: 190 } },
+      { name: "Sonar", params: { shape: "circle", petals: 5, speed: 220, spin: 0, spinDir: "cw", hue: 150 } },
+    ],
+  },
+  {
+    slug: "particle-constellation",
+    title: "Particle Constellation",
+    blurb:
+      "Particles stream in from a screen edge and ease into a glowing geometric outline — triangle, hexagon, star, or spiral — then hold, pulse, and link up before scattering and re-forming. Click to jump to the next shape.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "constellation", "formation", "geometric"],
+    tier: 1,
+    controls: [
+      {
+        key: "shape",
+        label: "Shape",
+        type: "select",
+        options: [
+          { label: "Cycle all", value: "cycle" },
+          { label: "Triangle", value: "triangle" },
+          { label: "Hexagon", value: "hexagon" },
+          { label: "Star", value: "star" },
+          { label: "Spiral", value: "spiral" },
+        ],
+        default: "cycle",
+      },
+      { key: "points", label: "Points", type: "range", min: 40, max: 160, step: 10, default: 90 },
+      { key: "links", label: "Links", type: "toggle", default: true },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Constellation", params: { shape: "cycle", points: 90, links: true, colorMode: "single", hue: 280 } },
+      { name: "Star Map", params: { shape: "star", points: 120, links: true, colorMode: "dual", hue: 50, hue2: 320 } },
+      { name: "Prism", params: { shape: "cycle", points: 130, links: true, colorMode: "rainbow", hue: 280 } },
+    ],
+  },
+  {
+    slug: "comet-impact",
+    title: "Comet Impact",
+    blurb:
+      "A glowing comet spirals in from a screen edge and detonates on impact — a radial shockwave ring, a ring of converging energy particles, and a central flash. Auto-launches on a ramping cadence; click to call one down.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/intro-experience.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "impact", "comet", "pooled", "click"],
+    tier: 1,
+    controls: [
+      { key: "spiral", label: "Spiral", type: "range", min: 0, max: 3, step: 0.1, default: 1.2 },
+      { key: "trail", label: "Trail length", type: "range", min: 6, max: 40, step: 2, default: 24 },
+      { key: "converge", label: "Converge + shockwave", type: "toggle", default: true },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 320, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Meteor", params: { spiral: 0.6, trail: 30, converge: true, hue: 30 } },
+      { name: "Prism Comet", params: { spiral: 1.2, trail: 24, converge: true, colorMode: "rainbow", hue: 200 } },
+      { name: "Ion", params: { spiral: 1.2, trail: 18, converge: true, hue: 190 } },
+    ],
+  },
+  {
+    slug: "caustic-light",
+    title: "Caustic Light",
+    blurb:
+      "Drifting overlapping radial-gradient light pools that morph like pool-water or polished-chrome caustics.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/liquid-chrome/components/ChromeAnimations.tsx",
+    },
+    tags: ["ambient", "gradient", "glow", "liquid", "background"],
+    tier: 1,
+    controls: [
+      { key: "poolCount", label: "Pool count", type: "range", min: 4, max: 48, step: 1, default: 18 },
+      { key: "driftSpeed", label: "Drift speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "softness", label: "Softness", type: "range", min: 0.5, max: 2.5, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Chrome Pool", params: { poolCount: 18, driftSpeed: 1, softness: 1, colorMode: "single", hue: 200 } },
+      { name: "Aurora Bath", params: { poolCount: 28, driftSpeed: 0.6, softness: 1.8, colorMode: "dual", hue: 180, hue2: 300 } },
+      { name: "Prismatic Drift", params: { poolCount: 36, driftSpeed: 1.6, softness: 1.3, colorMode: "rainbow", hue: 200 } },
+    ],
+  },
+  {
+    slug: "prismatic-motes",
+    title: "Prismatic Motes",
+    blurb:
+      "Soft prismatic motes drifting on gentle orbits, each leaving a fading trail drawn from stored position history.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/crystalline/components/CrystalAnimations.tsx",
+    },
+    tags: ["particles", "glow", "trail", "ambient", "rainbow"],
+    tier: 1,
+    controls: [
+      { key: "moteCount", label: "Mote count", type: "range", min: 5, max: 80, step: 1, default: 30 },
+      { key: "speed", label: "Speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "trailLength", label: "Trail length", type: "range", min: 2, max: 30, step: 1, default: 12 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "rainbow",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Rainbow Drift", params: { moteCount: 30, speed: 1, trailLength: 12, colorMode: "rainbow", hue: 280 } },
+      { name: "Violet Dust", params: { moteCount: 45, speed: 0.6, trailLength: 18, colorMode: "single", hue: 280 } },
+      { name: "Comet Swarm", params: { moteCount: 24, speed: 2.2, trailLength: 26, colorMode: "dual", hue: 200, hue2: 320 } },
+    ],
+  },
+  {
+    slug: "sakura-petals",
+    title: "Sakura Petals",
+    blurb:
+      "Falling cherry-blossom petals with depth layers, sway, flutter, and rotation. Move the pointer to stir up a breeze.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/anime-founder/components/AnimeAnimations.tsx",
+    },
+    tags: ["particles", "nature", "ambient", "interactive", "pointer"],
+    tier: 1,
+    controls: [
+      { key: "petalCount", label: "Petal count", type: "range", min: 8, max: 120, step: 1, default: 30 },
+      { key: "fallSpeed", label: "Fall speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "wind", label: "Wind / sway", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 330 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Spring Bloom", params: { petalCount: 30, fallSpeed: 1, wind: 1, colorMode: "single", hue: 330 } },
+      { name: "Gentle Snow", params: { petalCount: 60, fallSpeed: 0.5, wind: 0.4, colorMode: "single", hue: 320 } },
+      { name: "Stormy Blossom", params: { petalCount: 90, fallSpeed: 1.8, wind: 2.6, colorMode: "dual", hue: 330, hue2: 280 } },
+    ],
+  },
+  {
+    slug: "holo-grid",
+    title: "Holographic Grid",
+    blurb:
+      "A perspective holographic floor grid recedes toward a glowing horizon while buoyant hex data glyphs rise and flicker through a horizontal scan sweep.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/command-center/components/CommandAnimations.tsx",
+    },
+    tags: ["Canvas 2D", "grid", "perspective", "data", "sci-fi"],
+    tier: 1,
+    controls: [
+      { key: "density", label: "Grid density", type: "range", min: 6, max: 40, step: 1, default: 16 },
+      { key: "speed", label: "Recede speed", type: "range", min: 0, max: 4, step: 0.1, default: 1 },
+      { key: "particleRate", label: "Data rate", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 168 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Holodeck", params: { density: 16, speed: 1, particleRate: 1, colorMode: "single", hue: 168 } },
+      { name: "Tron Dual", params: { density: 22, speed: 1.6, particleRate: 1.4, colorMode: "dual", hue: 200, hue2: 30 } },
+      { name: "Data Stream", params: { density: 12, speed: 0.6, particleRate: 2.4, colorMode: "rainbow", hue: 168 } },
+    ],
+  },
+  {
+    slug: "ember-forge",
+    title: "Ember Forge",
+    blurb:
+      "Forge sparks, embers, and smoke rise from the hearth with white-hot trails and periodic anvil-strike flares. Click anywhere to hammer the anvil and burst sparks at the cursor.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/builder-forge/components/ForgeAnimations.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "fire", "click", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "sparkRate", label: "Spark rate", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "gravity", label: "Gravity / buoyancy", type: "range", min: 0.2, max: 2.5, step: 0.1, default: 1 },
+      { key: "strike", label: "Strike intensity", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 25 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 45, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Forge", params: { sparkRate: 1, gravity: 1, strike: 1, colorMode: "single", hue: 25 } },
+      { name: "Molten Gold", params: { sparkRate: 1.6, gravity: 0.8, strike: 1.6, colorMode: "dual", hue: 18, hue2: 48 } },
+      { name: "Cold Fire", params: { sparkRate: 1.2, gravity: 1, strike: 2, colorMode: "rainbow", hue: 25 } },
+    ],
+  },
+  {
+    slug: "spore-drift",
+    title: "Spore Drift",
+    blurb:
+      "Bioluminescent spores — drifters, trailing filaments, and orbiting clusters — float upward on gusting wind with soft glow, depth parallax, and faint connective filaments. Move the cursor to push the wind.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/neon-terrain/components/TerrainAnimations.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "organic", "pointer-reactive", "glow"],
+    tier: 1,
+    controls: [
+      { key: "density", label: "Density", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "wind", label: "Wind strength", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
+      { key: "glow", label: "Glow", type: "range", min: 0.2, max: 2, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 160 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Biolume", params: { density: 1, wind: 1, glow: 1, colorMode: "single", hue: 160 } },
+      { name: "Toxic Bloom", params: { density: 1.6, wind: 1.4, glow: 1.4, colorMode: "dual", hue: 150, hue2: 300 } },
+      { name: "Spectral Drift", params: { density: 1.2, wind: 0.8, glow: 1.2, colorMode: "rainbow", hue: 160 } },
+    ],
+  },
+  {
+    slug: "star-field",
+    title: "Star Field",
+    blurb:
+      "A layered, twinkling deep-space star field with drifting nebula color washes, mouse-driven ripples, and occasional shooting stars trailing across the void.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/constellation/components/ConstellationAnimations.tsx",
+    },
+    tags: ["space", "stars", "ambient", "background", "particles"],
+    tier: 1,
+    controls: [
+      { key: "density", label: "Star density", type: "range", min: 20, max: 160, step: 1, default: 70 },
+      { key: "twinkleSpeed", label: "Twinkle speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "shootRate", label: "Shooting-star rate", type: "range", min: 0.2, max: 4, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 220 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 290, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Midnight Blue", params: { density: 70, twinkleSpeed: 1, shootRate: 1, colorMode: "single", hue: 220 } },
+      { name: "Meteor Shower", params: { density: 110, twinkleSpeed: 1.6, shootRate: 3.2, colorMode: "single", hue: 205 } },
+      { name: "Nebula Drift", params: { density: 90, twinkleSpeed: 0.7, shootRate: 0.6, colorMode: "dual", hue: 220, hue2: 300 } },
+    ],
+  },
+  {
+    slug: "particle-field",
+    title: "Particle Field",
+    blurb:
+      "Connected drifting motes with glowing proximity link lines and mouse repulsion — a clean, modern hero background.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/components/gallery/ParticleField.tsx",
+    },
+    tags: ["network", "particles", "links", "interactive", "background"],
+    tier: 1,
+    controls: [
+      { key: "density", label: "Density", type: "range", min: 16, max: 140, step: 1, default: 60 },
+      { key: "linkDistance", label: "Link distance", type: "range", min: 60, max: 260, step: 1, default: 150 },
+      { key: "repulsion", label: "Repulsion force", type: "range", min: 0, max: 0.5, step: 0.01, default: 0.15 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 265 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 190, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Violet Web", params: { density: 60, linkDistance: 150, repulsion: 0.15, colorMode: "single", hue: 265 } },
+      { name: "Dense Mesh", params: { density: 120, linkDistance: 110, repulsion: 0.1, colorMode: "rainbow", hue: 265 } },
+      { name: "Repel Field", params: { density: 70, linkDistance: 180, repulsion: 0.4, colorMode: "dual", hue: 265, hue2: 190 } },
+    ],
+  },
+  {
+    slug: "abyss-plankton",
+    title: "Abyss Plankton",
+    blurb:
+      "Deep-sea bioluminescent plankton — soft pulsing motes drift upward through a dark abyssal gradient, glowing brighter as the cursor passes near.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/bioluminescent/components/AbyssAnimations.tsx",
+    },
+    tags: ["ocean", "bioluminescent", "ambient", "particles", "interactive"],
+    tier: 1,
+    controls: [
+      { key: "density", label: "Density", type: "range", min: 16, max: 140, step: 1, default: 55 },
+      { key: "pulseSpeed", label: "Pulse speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "drift", label: "Drift", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 320, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Cyan Abyss", params: { density: 55, pulseSpeed: 1, drift: 1, colorMode: "single", hue: 190 } },
+      { name: "Slow Bloom", params: { density: 40, pulseSpeed: 0.5, drift: 0.5, colorMode: "single", hue: 175 } },
+      { name: "Twilight Reef", params: { density: 90, pulseSpeed: 1.4, drift: 1.3, colorMode: "dual", hue: 190, hue2: 320 } },
+    ],
+  },
+  {
+    slug: "electric-border",
+    title: "Electric Border",
+    blurb:
+      "A rounded-rect panel whose perimeter is traced by a crawling, noise-jittered electric arc with additive glow that crackles as it travels.",
+    source: {
+      project: "dm5dot5-reconcile",
+      path: "src/components/animations/ElectricBorder.tsx",
+    },
+    tags: ["Canvas 2D", "glow", "noise", "border"],
+    tier: 1,
+    controls: [
+      { key: "intensity", label: "Arc intensity", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "chaos", label: "Jitter", type: "range", min: 0.02, max: 0.4, step: 0.01, default: 0.12 },
+      { key: "speed", label: "Speed", type: "range", min: 0.1, max: 3, step: 0.1, default: 1 },
+      { key: "radius", label: "Corner radius", type: "range", min: 0, max: 120, step: 1, default: 28 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Cyan Crackle", params: { intensity: 1, chaos: 0.12, speed: 1, radius: 28, colorMode: "single", hue: 190 } },
+      { name: "Storm", params: { intensity: 2, chaos: 0.3, speed: 2.2, radius: 18, colorMode: "single", hue: 280 } },
+      { name: "Rainbow Frame", params: { intensity: 1.2, chaos: 0.1, speed: 0.8, radius: 48, colorMode: "rainbow", hue: 190 } },
+    ],
+  },
+  {
+    slug: "liquid-web",
+    title: "Liquid Web",
+    blurb:
+      "Soft liquid blobs drift and leave trails, repel and energize near the cursor, and weave connection lines between neighbors. Click to spawn a blob and a shockwave ring.",
+    source: {
+      project: "idearlanding (backup)",
+      path: "components/LiquidCanvas.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "pointer-reactive", "click", "links"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Blob count", type: "range", min: 8, max: 140, step: 1, default: 60 },
+      { key: "linkDist", label: "Link distance", type: "range", min: 40, max: 220, step: 5, default: 110 },
+      { key: "speed", label: "Speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 210 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Calm Flow", params: { count: 50, linkDist: 110, speed: 0.6, colorMode: "single", hue: 210 } },
+      { name: "Dense Web", params: { count: 120, linkDist: 150, speed: 1.2, colorMode: "dual", hue: 210, hue2: 290 } },
+      { name: "Spectrum", params: { count: 80, linkDist: 120, speed: 1, colorMode: "rainbow", hue: 210 } },
+    ],
+  },
+  {
+    slug: "neural-net",
+    title: "Neural Net",
+    blurb:
+      "Sharp drifting nodes wired by distance-based synapse lines, with energy pulses that travel and chain from link to link.",
+    source: {
+      project: "idearlanding (backup)",
+      path: "components/NeuralBackground.tsx",
+    },
+    tags: ["Canvas 2D", "network", "pulses", "links"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Node count", type: "range", min: 8, max: 100, step: 1, default: 48 },
+      { key: "linkDist", label: "Link distance", type: "range", min: 60, max: 260, step: 5, default: 150 },
+      { key: "pulseRate", label: "Pulse rate", type: "range", min: 0, max: 5, step: 0.1, default: 1.2 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Synapse", params: { count: 48, linkDist: 150, pulseRate: 1.2, colorMode: "single", hue: 280 } },
+      { name: "Hyperactive", params: { count: 80, linkDist: 180, pulseRate: 4, colorMode: "dual", hue: 280, hue2: 200 } },
+      { name: "Quiet Grid", params: { count: 30, linkDist: 130, pulseRate: 0.4, colorMode: "rainbow", hue: 280 } },
+    ],
+  },
+  {
+    slug: "touch-ripple",
+    title: "Touch Ripple",
+    blurb:
+      "Expanding radial-gradient ripple rings bloom on tap, with gentle ambient auto-ripples drifting across the canvas. Pooled for zero-GC spawning.",
+    source: {
+      project: "1shotscan",
+      path: "src/components/RippleCanvas.tsx",
+    },
+    tags: ["Canvas 2D", "ripple", "click", "ambient", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "ambientRate", label: "Ambient rate", type: "range", min: 0, max: 4, step: 0.1, default: 0.6 },
+      { key: "size", label: "Ripple size", type: "range", min: 0.4, max: 2.5, step: 0.1, default: 1 },
+      { key: "expandSpeed", label: "Expansion speed", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "thickness", label: "Ring thickness", type: "range", min: 1, max: 8, step: 0.5, default: 2 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 175 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Teal Pond", params: { ambientRate: 0.6, size: 1, expandSpeed: 1, thickness: 2, colorMode: "single", hue: 175 } },
+      { name: "Downpour", params: { ambientRate: 3, size: 0.7, expandSpeed: 1.6, thickness: 1.5, colorMode: "single", hue: 200 } },
+      { name: "Tap Only", params: { ambientRate: 0, size: 1.6, expandSpeed: 0.9, thickness: 3, colorMode: "dual", hue: 175, hue2: 280 } },
+    ],
+  },
+  {
+    slug: "comet-overlay",
+    title: "Comet Overlay",
+    blurb:
+      "An ambient overlay where comets streak in from the screen edges on an internal rhythm, glitter sparkles ring the center, corner drips rise on peaks, and a triple-arm spiral draws itself. Click to trigger a radial comet burst.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "allroadsleadtocursor-repo/components/audio-reactive-overlay.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "comet", "ambient", "click"],
+    tier: 1,
+    controls: [
+      { key: "cometRate", label: "Comet rate", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "glitter", label: "Glitter density", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "spiral", label: "Spiral", type: "toggle", default: true },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Violet Drift", params: { cometRate: 1, glitter: 1, spiral: true, colorMode: "single", hue: 280 } },
+      { name: "Aurora", params: { cometRate: 1.4, glitter: 1.6, spiral: true, colorMode: "dual", hue: 200, hue2: 300 } },
+      { name: "Prism Shower", params: { cometRate: 2, glitter: 2, spiral: false, colorMode: "rainbow", hue: 280 } },
+    ],
+  },
+  {
+    slug: "ocean-wave",
+    title: "Ocean Wave",
+    blurb:
+      "A particle ocean of glowing dots riding stacked sine waves across the lower third of the canvas, bobbing and pulsing to an internal swell. No audio — the swell is driven by layered sine waves over time.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/pre-intro.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "waves", "ambient", "glow"],
+    tier: 1,
+    controls: [
+      { key: "amplitude", label: "Wave amplitude", type: "range", min: 10, max: 120, step: 5, default: 40 },
+      { key: "speed", label: "Wave speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "density", label: "Particle density", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Calm Sea", params: { amplitude: 30, speed: 0.7, density: 1, colorMode: "single", hue: 200 } },
+      { name: "Cyan/Magenta Swell", params: { amplitude: 60, speed: 1.2, density: 1.4, colorMode: "dual", hue: 190, hue2: 320 } },
+      { name: "Prism Tide", params: { amplitude: 80, speed: 1.6, density: 1.8, colorMode: "rainbow", hue: 200 } },
+    ],
+  },
+  {
+    slug: "spark-fountain",
+    title: "Spark Fountain",
+    blurb:
+      "Upward sparks launch from the bottom edge under gravity and fade as they fall, fired in periodic bursts on an internal rhythm. Click anywhere to launch an extra burst at the pointer. Pooled for zero-GC.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/pre-intro.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "fountain", "click", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "burstRate", label: "Burst rate", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "power", label: "Launch power", type: "range", min: 0.4, max: 2, step: 0.1, default: 1 },
+      { key: "gravity", label: "Gravity", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 30 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 50, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Embers", params: { burstRate: 1, power: 1, gravity: 1, colorMode: "single", hue: 30 } },
+      { name: "Fire & Gold", params: { burstRate: 1.4, power: 1.3, gravity: 1, colorMode: "dual", hue: 16, hue2: 48 } },
+      { name: "Festival", params: { burstRate: 2, power: 1.5, gravity: 0.7, colorMode: "rainbow", hue: 30 } },
+    ],
+  },
+  {
+    slug: "infinite-starfield",
+    title: "Infinite Starfield",
+    blurb:
+      "A twinkling star canvas over a subtle perspective grid with gentle mouse-driven parallax — stars and grid shift slightly toward the pointer, nearer stars drifting more. Move your cursor to steer the depth.",
+    source: {
+      project: "XPanywhere",
+      path: "repo/src/components/landing/InfiniteCanvas.tsx",
+    },
+    tags: ["Canvas 2D", "starfield", "pointer-reactive", "parallax", "background"],
+    tier: 1,
+    controls: [
+      { key: "density", label: "Star density", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "twinkle", label: "Twinkle speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "grid", label: "Grid", type: "toggle", default: true },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 225 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Deep Space", params: { density: 1, twinkle: 1, grid: true, colorMode: "single", hue: 225 } },
+      { name: "Dense Sky", params: { density: 2, twinkle: 1.4, grid: false, colorMode: "single", hue: 210 } },
+      { name: "Nebula", params: { density: 1.4, twinkle: 1.2, grid: true, colorMode: "dual", hue: 225, hue2: 300 } },
+    ],
+  },
+  {
+    slug: "code-orbit",
+    title: "Code Orbit",
+    blurb:
+      "Floating monospace code tokens drift in gentle orbital motion with mouse-ripple physics — tokens are pushed away from the cursor and ease back to their orbits. Pure DOM with a self-managed rAF loop; honors reduced-motion.",
+    source: {
+      project: "VisualDomainTesting",
+      path: "floating-code.js",
+    },
+    tags: ["CSS", "DOM", "pointer-reactive", "orbital", "code"],
+    tier: 1,
+    controls: [
+      { key: "tokens", label: "Token count", type: "range", min: 8, max: 60, step: 2, default: 28 },
+      { key: "drift", label: "Drift speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "ripple", label: "Ripple strength", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Nebula Code", params: { tokens: 28, drift: 1, ripple: 1, colorMode: "single", hue: 190 } },
+      { name: "Dense Swarm", params: { tokens: 50, drift: 1.4, ripple: 1.5, colorMode: "dual", hue: 190, hue2: 300 } },
+      { name: "Prism Drift", params: { tokens: 36, drift: 0.8, ripple: 1, colorMode: "rainbow", hue: 190 } },
+    ],
+  },
+  {
+    slug: "wireframe-cubes",
+    title: "Wireframe Cubes",
+    blurb:
+      "Tumbling 3D wireframe cubes projected to 2D with a perspective divide, drifting across the screen on additive-glow edges.",
+    source: {
+      project: "AllRoadsLeadToCursor",
+      path: "ARLTC/allroadsleadtocursor/components/pre-intro.tsx",
+    },
+    tags: ["3d", "wireframe", "geometric", "canvas", "glow"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Cube count", type: "range", min: 1, max: 40, step: 1, default: 14 },
+      { key: "speed", label: "Rotation speed", type: "range", min: 0.1, max: 3, step: 0.1, default: 1 },
+      { key: "size", label: "Size", type: "range", min: 0.4, max: 2.5, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 210 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 320, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Cursor Cyan", params: { count: 14, speed: 1, size: 1, colorMode: "single", hue: 195 } },
+      { name: "Neon Swarm", params: { count: 28, speed: 1.6, size: 0.8, colorMode: "rainbow", hue: 210 } },
+      { name: "Magenta Drift", params: { count: 9, speed: 0.6, size: 1.6, colorMode: "dual", hue: 210, hue2: 320 } },
+    ],
+  },
+  {
+    slug: "chain-detonation",
+    title: "Chain Detonation",
+    blurb:
+      "Chained explosions that leap to nearby points, linked by electric arcs, with expanding shock rings and a screen-edge glow. Click to detonate.",
+    source: {
+      project: "aVOID",
+      path: "games/void-avoid/src/game/systems/ChainDetonationRenderer.ts",
+    },
+    tags: ["explosion", "chain", "electric", "particles", "canvas", "click"],
+    tier: 1,
+    controls: [
+      { key: "chainLength", label: "Chain length", type: "range", min: 2, max: 14, step: 1, default: 7 },
+      { key: "blastPower", label: "Blast power", type: "range", min: 0.5, max: 4, step: 0.1, default: 2 },
+      { key: "linkIntensity", label: "Link intensity", type: "range", min: 0, max: 2, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 190, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Violet Storm", params: { chainLength: 7, blastPower: 2, linkIntensity: 1, colorMode: "single", hue: 280 } },
+      { name: "Plasma Run", params: { chainLength: 12, blastPower: 1.4, linkIntensity: 1.6, colorMode: "dual", hue: 280, hue2: 190 } },
+      { name: "Big Bombs", params: { chainLength: 4, blastPower: 4, linkIntensity: 0.6, colorMode: "rainbow", hue: 280 } },
+    ],
+  },
+  {
+    slug: "depth-tunnel",
+    title: "Depth Tunnel",
+    blurb:
+      "A perspective recess illusion — concentric receding layers form a 3D tunnel that the cursor steers via parallax. Pure CSS transforms, five tunnel styles.",
+    source: {
+      project: "Custom-components (DepthCard)",
+      path: "DepthCard/depthcard-demo/src/styles/variants.css",
+    },
+    tags: ["3d", "css", "depth", "tunnel", "parallax", "perspective"],
+    tier: 1,
+    controls: [
+      {
+        key: "variant",
+        label: "Variant",
+        type: "select",
+        options: [
+          { label: "Radial", value: "radial" },
+          { label: "Spiral", value: "spiral" },
+          { label: "Hex Pit", value: "hex-pit" },
+          { label: "Neon Warp", value: "neon-warp" },
+          { label: "Ripple Well", value: "ripple-well" },
+        ],
+        default: "radial",
+      },
+      { key: "depth", label: "Depth", type: "range", min: 0, max: 100, step: 1, default: 60 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Violet Portal", params: { variant: "radial", depth: 60, colorMode: "single", hue: 280 } },
+      { name: "Neon Warp", params: { variant: "neon-warp", depth: 80, colorMode: "dual", hue: 280, hue2: 200 } },
+      { name: "Spiral Dive", params: { variant: "spiral", depth: 90, colorMode: "rainbow", hue: 280 } },
+    ],
+  },
+  {
+    slug: "crystal-core",
+    title: "Crystal Core",
+    blurb:
+      "A real WebGL scene: a distorted, metallic icosahedron core orbited by faceted shards, lit by two colored lights. Scroll to zoom and drag to orbit around it.",
+    source: {
+      project: "Ideas Visualized",
+      path: "components/effects/crystal-core/index.tsx",
+    },
+    tags: ["3d", "webgl", "three.js", "r3f", "glow", "pointer"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Orbiting shards", type: "range", min: 0, max: 24, step: 1, default: 9 },
+      { key: "speed", label: "Speed", type: "range", min: 0.1, max: 3, step: 0.1, default: 1 },
+      { key: "distort", label: "Distortion", type: "range", min: 0, max: 1, step: 0.05, default: 0.4 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "dual",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Ice & Magenta", params: { count: 9, speed: 1, distort: 0.4, colorMode: "dual", hue: 200, hue2: 300 } },
+      { name: "Liquid Gold", params: { count: 6, speed: 0.7, distort: 0.55, colorMode: "single", hue: 42 } },
+      { name: "Prism Swarm", params: { count: 18, speed: 1.6, distort: 0.3, colorMode: "rainbow", hue: 200 } },
+    ],
+  },
+  {
+    slug: "galaxy-spiral",
+    title: "Galaxy Spiral",
+    blurb:
+      "A procedurally generated spiral galaxy rendered as a real WebGL point cloud — thousands of stars sweeping along branching arms with a glowing two-tone core. Scroll to zoom and drag to orbit right into the disc.",
+    source: { project: "Ideas Visualized", path: "components/effects/galaxy-spiral/index.tsx" },
+    tags: ["3d", "webgl", "three.js", "r3f", "particles", "pointer"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Stars", type: "range", min: 1000, max: 20000, step: 500, default: 12000 },
+      {
+        key: "shape",
+        label: "Particle shape",
+        type: "select",
+        options: [
+          { label: "Points", value: "points" },
+          { label: "Wire cubes", value: "cube" },
+          { label: "Wire octahedra", value: "octahedron" },
+          { label: "Wire tetrahedra", value: "tetrahedron" },
+          { label: "Wire icosahedra", value: "icosahedron" },
+        ],
+        default: "points",
+      },
+      { key: "shapeSize", label: "Shape size", type: "range", min: 0.3, max: 3, step: 0.1, default: 1, showIf: { key: "shape", in: ["cube", "octahedron", "tetrahedron", "icosahedron"] } },
+      { key: "arms", label: "Arms", type: "range", min: 2, max: 8, step: 1, default: 4 },
+      { key: "spin", label: "Spin speed", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "spread", label: "Spread", type: "range", min: 0, max: 1, step: 0.05, default: 0.4 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 260 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 30, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Andromeda", params: { count: 14000, shape: "points", arms: 4, spin: 1, spread: 0.4, colorMode: "dual", hue: 260, hue2: 30 } },
+      { name: "Crystal Swarm", params: { count: 4000, shape: "octahedron", shapeSize: 1.2, arms: 5, spin: 1, spread: 0.4, colorMode: "rainbow", hue: 200, hue2: 200 } },
+      { name: "Cube Drift", params: { count: 3000, shape: "cube", shapeSize: 1, arms: 4, spin: 0.7, spread: 0.5, colorMode: "dual", hue: 200, hue2: 320 } },
+      { name: "Emberdrift", params: { count: 9000, shape: "points", arms: 3, spin: 0.6, spread: 0.7, colorMode: "dual", hue: 18, hue2: 290 } },
+    ],
+  },
+  {
+    slug: "warp-stars-3d",
+    title: "Hyperdrive",
+    blurb:
+      "A real 3D starfield you fly through — click and hold to punch into hyperdrive and stretch the stars into streaks as the field-of-view widens.",
+    source: { project: "Ideas Visualized", path: "components/effects/warp-stars-3d/index.tsx" },
+    tags: ["3d", "webgl", "three.js", "r3f", "stars", "click", "space"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Stars", type: "range", min: 500, max: 6000, step: 100, default: 2500 },
+      { key: "cruise", label: "Cruise speed", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "warpBoost", label: "Warp boost", type: "range", min: 1, max: 6, step: 0.5, default: 3 },
+      { key: "streak", label: "Streak", type: "range", min: 0, max: 1, step: 0.05, default: 0.5 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "single" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 210 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 45, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Cruise", params: { count: 2500, cruise: 0.8, warpBoost: 3, streak: 0.35, colorMode: "single", hue: 210 } },
+      { name: "Jump to Lightspeed", params: { count: 4000, cruise: 1.4, warpBoost: 6, streak: 0.9, colorMode: "dual", hue: 210, hue2: 45 } },
+      { name: "Rainbow Warp", params: { count: 5000, cruise: 1, warpBoost: 5, streak: 0.7, colorMode: "rainbow", hue: 200 } },
+    ],
+  },
+  {
+    slug: "wave-grid-3d",
+    title: "Wave Grid",
+    blurb:
+      "A rippling 3D wireframe terrain — layered sine waves graded by height, bulging toward your cursor.",
+    source: { project: "Ideas Visualized", path: "components/effects/wave-grid-3d/index.tsx" },
+    tags: ["3d", "webgl", "three.js", "r3f", "wireframe", "terrain", "pointer"],
+    tier: 1,
+    controls: [
+      { key: "segments", label: "Resolution", type: "range", min: 40, max: 150, step: 10, default: 110 },
+      { key: "amplitude", label: "Amplitude", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "frequency", label: "Frequency", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "speed", label: "Speed", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Ocean", params: { segments: 120, amplitude: 0.8, frequency: 0.8, speed: 0.7, colorMode: "dual", hue: 190, hue2: 230 } },
+      { name: "Neon Hills", params: { segments: 110, amplitude: 1.4, frequency: 1.2, speed: 1, colorMode: "dual", hue: 300, hue2: 180 } },
+      { name: "Rainbow Dunes", params: { segments: 130, amplitude: 1.1, frequency: 1, speed: 1.2, colorMode: "rainbow", hue: 200 } },
+    ],
+  },
+  {
+    slug: "torus-knot",
+    title: "Torus Knot",
+    blurb:
+      "A glowing, slowly morphing torus knot rendered in real WebGL — emissive under bloom, twisting and breathing under two palette-colored lights, with a faint wireframe knot behind it for depth.",
+    source: { project: "Ideas Visualized", path: "components/effects/torus-knot/index.tsx" },
+    tags: ["3d", "webgl", "three.js", "r3f", "geometry", "glow"],
+    tier: 1,
+    controls: [
+      { key: "knotP", label: "Winding P", type: "range", min: 1, max: 8, step: 1, default: 2 },
+      { key: "knotQ", label: "Winding Q", type: "range", min: 1, max: 12, step: 1, default: 3 },
+      { key: "thickness", label: "Tube radius", type: "range", min: 0.05, max: 0.6, step: 0.05, default: 0.25 },
+      { key: "speed", label: "Speed", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Cyan Lagoon", params: { knotP: 2, knotQ: 3, thickness: 0.25, speed: 1, colorMode: "dual", hue: 190, hue2: 300 } },
+      { name: "Solar Coil", params: { knotP: 3, knotQ: 7, thickness: 0.4, speed: 1.6, colorMode: "single", hue: 28 } },
+      { name: "Prism Drift", params: { knotP: 4, knotQ: 9, thickness: 0.18, speed: 0.7, colorMode: "rainbow", hue: 200, hue2: 320 } },
+    ],
+  },
+  {
+    slug: "dna-helix",
+    title: "DNA Helix",
+    blurb:
+      "A rotating DNA double helix: two strands of glowing instanced spheres spiral around a vertical axis, linked by base-pair rungs, with color running as a gradient along the helix and bloom selling the glow.",
+    source: { project: "Ideas Visualized", path: "components/effects/dna-helix/index.tsx" },
+    tags: ["3d", "webgl", "three.js", "r3f", "helix", "glow"],
+    tier: 1,
+    controls: [
+      { key: "pairs", label: "Base pairs", type: "range", min: 10, max: 80, step: 1, default: 36 },
+      { key: "radius", label: "Radius", type: "range", min: 0.5, max: 3, step: 0.1, default: 1.4 },
+      { key: "turns", label: "Turns", type: "range", min: 1, max: 8, step: 0.5, default: 4 },
+      { key: "speed", label: "Speed", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 330, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Classic Blue", params: { pairs: 36, radius: 1.4, turns: 4, speed: 1, colorMode: "dual", hue: 200, hue2: 330 } },
+      { name: "Rainbow Coil", params: { pairs: 64, radius: 1.8, turns: 6, speed: 1.4, colorMode: "rainbow", hue: 200, hue2: 330 } },
+      { name: "Tight Emerald", params: { pairs: 50, radius: 1.0, turns: 7, speed: 0.6, colorMode: "single", hue: 150, hue2: 150 } },
+    ],
+  },
+  {
+    slug: "charge-burst",
+    title: "Charge Burst",
+    blurb:
+      "Click and hold to gather energy, then release. Time the release at the peak (the flashing sweet-spot ring) for a max-power burst with shockwaves — overcharge too long and it goes unstable, scattering a weaker blast.",
+    source: { project: "aVOID", path: "components/effects/charge-burst/index.tsx" },
+    tags: ["Canvas 2D", "click", "charge", "hold", "particles", "pointer"],
+    tier: 1,
+    controls: [
+      { key: "chargeTime", label: "Charge time (s)", type: "range", min: 0.4, max: 3, step: 0.1, default: 1.2 },
+      { key: "burstSize", label: "Burst size", type: "range", min: 40, max: 320, step: 10, default: 140 },
+      { key: "spread", label: "Spread", type: "range", min: 0.3, max: 2, step: 0.1, default: 1 },
+      { key: "gravity", label: "Gravity", type: "range", min: 0, max: 1.5, step: 0.1, default: 0.4 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Plasma Charge", params: { chargeTime: 1.2, burstSize: 160, spread: 1, gravity: 0.3, colorMode: "dual", hue: 190, hue2: 290 } },
+      { name: "Solar Flare", params: { chargeTime: 0.9, burstSize: 200, spread: 1.2, gravity: 0.2, colorMode: "single", hue: 30 } },
+      { name: "Rainbow Bomb", params: { chargeTime: 1.5, burstSize: 240, spread: 1.4, gravity: 0.5, colorMode: "rainbow", hue: 200 } },
+      { name: "Heavy Mortar", params: { chargeTime: 2, burstSize: 120, spread: 0.6, gravity: 1.1, colorMode: "dual", hue: 20, hue2: 320 } },
+    ],
+  },
+];
+
+export function getMeta(slug: string): EffectMeta | undefined {
+  return effectsMeta.find((e) => e.slug === slug);
+}
