@@ -55,6 +55,10 @@ import { VortexTree } from "./vortex-tree";
 import { BlackHole } from "./black-hole";
 import { RippleDistortion } from "./ripple-distortion";
 import { FlipCard } from "./flip-card";
+import { NexusCard } from "./nexus-card";
+import { ParticleMorph } from "./particle-morph";
+import { NebulaCloud } from "./nebula-cloud";
+import { AuroraVeil } from "./aurora-veil";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -112,6 +116,10 @@ export const effectComponents: Record<string, EffectComponent> = {
   "black-hole": BlackHole,
   "ripple-distortion": RippleDistortion,
   "flip-card": FlipCard,
+  "nexus-card": NexusCard,
+  "particle-morph": ParticleMorph,
+  "nebula-cloud": NebulaCloud,
+  "aurora-veil": AuroraVeil,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {

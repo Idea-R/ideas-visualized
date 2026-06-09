@@ -1848,6 +1848,102 @@ export const effectsMeta: EffectMeta[] = [
       { name: "Prism Spin", params: { maxTilt: 22, glare: 0.45, flipAxis: "y", trigger: "click", frontText: "FRONT", backText: "BACK", colorMode: "rainbow", hue: 200, hue2: 200 } },
     ],
   },
+  {
+    slug: "nexus-card",
+    title: "Nexus Card",
+    blurb:
+      "A premium asset card floating over a living NEXUS network — glowing nodes drift, link constellation-style, and wire themselves into the card and your cursor.",
+    source: { project: "Ideas Visualized", path: "components/effects/nexus-card/index.tsx" },
+    tags: ["Canvas 2D", "network", "pointer-reactive", "click", "card"],
+    tier: 1,
+    controls: [
+      { key: "nodeCount", label: "Nodes", type: "range", min: 30, max: 160, step: 10, default: 90 },
+      { key: "linkDistance", label: "Link distance", type: "range", min: 60, max: 220, step: 10, default: 130 },
+      { key: "speed", label: "Speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "nexusPull", label: "Nexus pull", type: "range", min: 0, max: 1, step: 0.05, default: 0.4 },
+      { key: "showCard", label: "Show card", type: "toggle", default: true },
+      { key: "cardTitle", label: "Card title", type: "text", maxLength: 18, placeholder: "Asset", default: "NEXUS" },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Cyan Vault", params: { nodeCount: 90, linkDistance: 130, speed: 1, nexusPull: 0.4, showCard: true, cardTitle: "NEXUS", colorMode: "dual", hue: 190, hue2: 280 } },
+      { name: "Ember Grid", params: { nodeCount: 120, linkDistance: 160, speed: 1.4, nexusPull: 0.6, showCard: true, cardTitle: "FORGE", colorMode: "dual", hue: 18, hue2: 320 } },
+      { name: "Spectrum Mesh", params: { nodeCount: 150, linkDistance: 110, speed: 0.7, nexusPull: 0.25, showCard: true, cardTitle: "PRISM", colorMode: "rainbow", hue: 200, hue2: 280 } },
+    ],
+  },
+  {
+    slug: "particle-morph",
+    title: "Particle Morph",
+    blurb:
+      "A point cloud of thousands of particles that smoothly morphs between a sphere, cube, torus, and cone on a loop — with a gentle idle swirl. Click to jump to the next shape.",
+    source: { project: "Ideas Visualized", path: "components/effects/particle-morph/index.tsx" },
+    tags: ["3d", "webgl", "three.js", "r3f", "particles", "morph"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Particles", type: "range", min: 1000, max: 12000, step: 500, default: 6000 },
+      { key: "morphSpeed", label: "Morph speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "autoMorph", label: "Auto morph", type: "toggle", default: true },
+      { key: "pointSize", label: "Point size", type: "range", min: 0.02, max: 0.2, step: 0.01, default: 0.06 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 180, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Nebula Dual", params: { count: 6000, morphSpeed: 1, autoMorph: true, pointSize: 0.06, colorMode: "dual", hue: 280, hue2: 180 } },
+      { name: "Prism Rainbow", params: { count: 9000, morphSpeed: 1.6, autoMorph: true, pointSize: 0.05, colorMode: "rainbow", hue: 200, hue2: 60 } },
+      { name: "Dense Click Sculpt", params: { count: 12000, morphSpeed: 0.6, autoMorph: false, pointSize: 0.04, colorMode: "single", hue: 200, hue2: 200 } },
+    ],
+  },
+  {
+    slug: "nebula-cloud",
+    title: "Nebula Cloud",
+    blurb:
+      "A volumetric, drifting nebula you can fly into — thousands of additive glowing points clustered into soft billowing clumps that swirl and breathe under bloom. Scroll to dive inside, drag to orbit, middle-drag to pan.",
+    source: { project: "Ideas Visualized", path: "components/effects/nebula-cloud/index.tsx" },
+    tags: ["3d", "webgl", "three.js", "r3f", "particles", "space"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Points", type: "range", min: 2000, max: 20000, step: 1000, default: 9000 },
+      { key: "spread", label: "Spread", type: "range", min: 3, max: 14, step: 0.5, default: 8 },
+      { key: "density", label: "Density", type: "range", min: 0, max: 1, step: 0.05, default: 0.6 },
+      { key: "swirl", label: "Swirl", type: "range", min: 0, max: 2, step: 0.1, default: 0.6 },
+      { key: "pointSize", label: "Point size", type: "range", min: 0.03, max: 0.25, step: 0.01, default: 0.09 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 290 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Violet Drift", params: { count: 9000, spread: 8, density: 0.6, swirl: 0.6, pointSize: 0.09, colorMode: "dual", hue: 290, hue2: 200 } },
+      { name: "Deep Space", params: { count: 14000, spread: 11, density: 0.45, swirl: 0.3, pointSize: 0.07, colorMode: "single", hue: 215, hue2: 200 } },
+      { name: "Rainbow Veil", params: { count: 18000, spread: 9, density: 0.7, swirl: 1.2, pointSize: 0.06, colorMode: "rainbow", hue: 200, hue2: 200 } },
+    ],
+  },
+  {
+    slug: "aurora-veil",
+    title: "Aurora Veil",
+    blurb:
+      "Flowing aurora curtains that wave and shimmer over a faint starfield, pulsing with an internal rhythm for an audio-reactive feel. Move to bend the nearest curtain; click to send a pulse rippling along the veil.",
+    source: { project: "Ideas Visualized", path: "components/effects/aurora-veil/index.tsx" },
+    tags: ["Canvas 2D", "ambient", "pointer-reactive", "glow"],
+    tier: 1,
+    controls: [
+      { key: "bands", label: "Curtains", type: "range", min: 2, max: 8, step: 1, default: 4 },
+      { key: "waveSpeed", label: "Wave speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "height", label: "Height", type: "range", min: 0.4, max: 1, step: 0.05, default: 0.8 },
+      { key: "shimmer", label: "Shimmer", type: "range", min: 0, max: 1, step: 0.05, default: 0.5 },
+      { key: "brightness", label: "Brightness", type: "range", min: 0.4, max: 1.5, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "single" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 150 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Northern Green", params: { bands: 4, waveSpeed: 1, height: 0.8, shimmer: 0.5, brightness: 1, colorMode: "single", hue: 150, hue2: 280 } },
+      { name: "Twilight Dual", params: { bands: 5, waveSpeed: 0.8, height: 0.85, shimmer: 0.4, brightness: 1.1, colorMode: "dual", hue: 160, hue2: 280 } },
+      { name: "Spectrum Sky", params: { bands: 7, waveSpeed: 1.4, height: 0.9, shimmer: 0.7, brightness: 1.2, colorMode: "rainbow", hue: 200, hue2: 280 } },
+    ],
+  },
 ];
 
 export function getMeta(slug: string): EffectMeta | undefined {

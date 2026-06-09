@@ -10,6 +10,13 @@ const playable = [
     href: "/experiences/simon",
     tags: ["Game", "Canvas 2D", "Memory"],
   },
+  {
+    title: "Ideas in Motion",
+    blurb:
+      "A scroll-driven journey: layered parallax depth, zoom-on-scroll, lateral drift, and staggered text reveals — all tied to where you are on the page.",
+    href: "/experiences/scroll",
+    tags: ["Scroll", "Parallax", "Framer Motion"],
+  },
 ];
 
 const experiences = [
