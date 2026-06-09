@@ -51,6 +51,10 @@ import { WaveGrid3D } from "./wave-grid-3d";
 import { TorusKnot } from "./torus-knot";
 import { DnaHelix } from "./dna-helix";
 import { ChargeBurst } from "./charge-burst";
+import { VortexTree } from "./vortex-tree";
+import { BlackHole } from "./black-hole";
+import { RippleDistortion } from "./ripple-distortion";
+import { FlipCard } from "./flip-card";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -104,6 +108,10 @@ export const effectComponents: Record<string, EffectComponent> = {
   "torus-knot": TorusKnot,
   "dna-helix": DnaHelix,
   "charge-burst": ChargeBurst,
+  "vortex-tree": VortexTree,
+  "black-hole": BlackHole,
+  "ripple-distortion": RippleDistortion,
+  "flip-card": FlipCard,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {
