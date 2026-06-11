@@ -1944,6 +1944,222 @@ export const effectsMeta: EffectMeta[] = [
       { name: "Spectrum Sky", params: { bands: 7, waveSpeed: 1.4, height: 0.9, shimmer: 0.7, brightness: 1.2, colorMode: "rainbow", hue: 200, hue2: 280 } },
     ],
   },
+  {
+    slug: "testimonial-globe",
+    title: "Testimonial Globe",
+    blurb:
+      "Testimonial cards orbit a glowing core on a virtual sphere. The globe spins on its own, and you can drag to spin it with momentum or click a card to bring it to the front. Depth drives each card's size, blur, and fade, with faint links wiring neighbors into a nexus.",
+    source: {
+      project: "visual-scroll-ideas",
+      path: "src/components/sections/NoiseTextureSection.tsx",
+    },
+    tags: ["CSS 3D", "pointer-reactive", "drag", "card", "testimonials"],
+    tier: 1,
+    controls: [
+      { key: "cards", label: "Cards", type: "range", min: 5, max: 9, step: 1, default: 7 },
+      { key: "spinSpeed", label: "Spin speed", type: "range", min: 0, max: 40, step: 1, default: 12 },
+      { key: "spinDir", label: "Spin direction", type: "select", options: [{ label: "Forward", value: "forward" }, { label: "Reverse", value: "reverse" }], default: "forward" },
+      { key: "radius", label: "Radius", type: "range", min: 220, max: 380, step: 10, default: 300 },
+      { key: "autoSpin", label: "Auto spin", type: "toggle", default: true },
+      { key: "showLinks", label: "Nexus links", type: "toggle", default: true },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Cyan Drift", params: { cards: 7, spinSpeed: 12, spinDir: "forward", radius: 300, autoSpin: true, showLinks: true, colorMode: "dual", hue: 200, hue2: 280 } },
+      { name: "Ember Reverse", params: { cards: 9, spinSpeed: 18, spinDir: "reverse", radius: 340, autoSpin: true, showLinks: true, colorMode: "dual", hue: 18, hue2: 320 } },
+      { name: "Calm Spectrum", params: { cards: 5, spinSpeed: 6, spinDir: "forward", radius: 260, autoSpin: true, showLinks: false, colorMode: "rainbow", hue: 200, hue2: 280 } },
+    ],
+  },
+  {
+    slug: "electric-shader",
+    title: "Electric Field",
+    blurb:
+      "A real WebGL fragment shader: turbulent fbm lightning branches, flickering vertical bolts and a liquid energy field. The electricity bends toward your cursor, and a click sends a surge through the field.",
+    source: {
+      project: "CosmicVoice",
+      path: "whispering-bolt/src/components/ElectricShader.tsx",
+    },
+    tags: ["3d", "webgl", "three.js", "r3f", "shader", "glow", "pointer", "click"],
+    tier: 1,
+    controls: [
+      { key: "intensity", label: "Intensity", type: "range", min: 0, max: 2, step: 0.05, default: 1 },
+      { key: "speed", label: "Speed", type: "range", min: 0.1, max: 3, step: 0.1, default: 1 },
+      { key: "turbulence", label: "Branching", type: "range", min: 0, max: 2, step: 0.05, default: 1 },
+      { key: "glow", label: "Glow", type: "range", min: 0.2, max: 2.5, step: 0.05, default: 1 },
+      { key: "reactivity", label: "Pointer pull", type: "range", min: 0, max: 2, step: 0.05, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 205 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Storm Blue", params: { intensity: 1, speed: 1, turbulence: 1, glow: 1, reactivity: 1, colorMode: "dual", hue: 205, hue2: 280 } },
+      { name: "Plasma Surge", params: { intensity: 1.6, speed: 1.6, turbulence: 1.5, glow: 1.4, reactivity: 1.4, colorMode: "dual", hue: 300, hue2: 30 } },
+      { name: "Spectral Arc", params: { intensity: 1.1, speed: 0.8, turbulence: 1.2, glow: 1.2, reactivity: 1, colorMode: "rainbow", hue: 200, hue2: 200 } },
+    ],
+  },
+  {
+    slug: "arcane-spells",
+    title: "Arcane Spells",
+    blurb:
+      "Cast three dungeon spells on a loop: a swirling portal vortex, chain lightning that arcs between nodes, and an expanding rune ward. Click to recast at the pointer.",
+    source: {
+      project: "Dungeon-crawler",
+      path: "dungeon-crawler-og/src/game/vfx.ts",
+    },
+    tags: ["Canvas 2D", "particles", "pointer-reactive", "click", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "spell", label: "Spell", type: "select", options: [{ label: "Portal", value: "portal" }, { label: "Chain Lightning", value: "chain-lightning" }, { label: "Rune Circle", value: "rune-circle" }], default: "portal" },
+      { key: "density", label: "Density", type: "range", min: 0.4, max: 2, step: 0.1, default: 1 },
+      { key: "speed", label: "Speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "size", label: "Size", type: "range", min: 0.4, max: 2, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "autoCast", label: "Auto cast", type: "toggle", default: true },
+    ],
+    presets: [
+      { name: "Void Portal", params: { spell: "portal", colorMode: "dual", hue: 275, hue2: 200, density: 1.2, speed: 1, size: 1.1, autoCast: true } },
+      { name: "Arc Storm", params: { spell: "chain-lightning", colorMode: "single", hue: 195, density: 1.4, speed: 1.5, size: 1, autoCast: true } },
+      { name: "Glyph Ward", params: { spell: "rune-circle", colorMode: "dual", hue: 45, hue2: 280, density: 1, speed: 0.8, size: 1.15, autoCast: true } },
+      { name: "Rainbow Rift", params: { spell: "portal", colorMode: "rainbow", hue: 280, density: 1.5, speed: 1.2, size: 1.2, autoCast: true } },
+    ],
+  },
+  {
+    slug: "butterfly-garden",
+    title: "Butterfly Garden",
+    blurb:
+      "Butterflies drift across the canvas with flapping wings and wandering flight paths. Move your cursor to draw them in or scatter them, and tune the count, speed, and wing beat.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/eternal-valley/components/ValleyAnimations.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "pointer-reactive", "pooled", "nature"],
+    tier: 1,
+    controls: [
+      { key: "count", label: "Butterflies", type: "range", min: 4, max: 40, step: 1, default: 18 },
+      { key: "speed", label: "Speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "wingFlap", label: "Wing flap", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "size", label: "Size", type: "range", min: 0.5, max: 2, step: 0.1, default: 1 },
+      { key: "pointer", label: "Pointer", type: "select", options: [{ label: "Attract", value: "attract" }, { label: "Repel", value: "repel" }, { label: "Ignore", value: "ignore" }], default: "attract" },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 40 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 130, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Golden Meadow", params: { count: 18, speed: 1, wingFlap: 1, size: 1, pointer: "attract", colorMode: "dual", hue: 40, hue2: 130 } },
+      { name: "Rainbow Flutter", params: { count: 28, speed: 1.3, wingFlap: 1.4, size: 0.9, pointer: "attract", colorMode: "rainbow", hue: 200, hue2: 200 } },
+      { name: "Scatter", params: { count: 22, speed: 1.6, wingFlap: 1.6, size: 1, pointer: "repel", colorMode: "dual", hue: 280, hue2: 200 } },
+    ],
+  },
+  {
+    slug: "watercolor-reveal",
+    title: "Watercolor Reveal",
+    blurb:
+      "A brush-stroke clip-path wipe paints in a gradient panel and a short word, holds, then fades and repeats. Click to paint it again, and set the text, pace, and edge softness.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/showcases/eternal-valley/components/ValleyAnimations.tsx",
+    },
+    tags: ["CSS", "clip-path", "reveal", "loop", "click", "text"],
+    tier: 1,
+    controls: [
+      { key: "text", label: "Text", type: "text", maxLength: 24, placeholder: "Bloom", default: "Bloom" },
+      { key: "duration", label: "Duration", type: "range", min: 0.4, max: 4, step: 0.1, default: 1.6 },
+      { key: "softness", label: "Edge softness", type: "range", min: 0, max: 1, step: 0.05, default: 0.5 },
+      { key: "autoLoop", label: "Auto loop", type: "toggle", default: true },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 190, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Violet Bloom", params: { text: "Bloom", duration: 1.6, softness: 0.5, autoLoop: true, colorMode: "dual", hue: 280, hue2: 190 } },
+      { name: "Sunrise", params: { text: "Hello", duration: 1.2, softness: 0.7, autoLoop: true, colorMode: "dual", hue: 24, hue2: 320 } },
+      { name: "Prism Wash", params: { text: "Ideas", duration: 2.2, softness: 0.35, autoLoop: true, colorMode: "rainbow", hue: 200, hue2: 200 } },
+    ],
+  },
+  {
+    slug: "dice-3d",
+    title: "Dice Tumble",
+    blurb:
+      "Polyhedral dice tumble in space with a glossy metallic finish and glowing edges. Click anywhere to reroll: each die spins up fast and settles into a fresh resting pose.",
+    source: {
+      project: "dm5dot5",
+      path: "src/components/dice3d/DiceSpinner3D.tsx",
+    },
+    tags: ["WebGL", "three.js", "R3F", "3D", "click", "kinematic"],
+    tier: 1,
+    controls: [
+      { key: "diceType", label: "Dice", type: "select", options: [{ label: "d6 (cube)", value: "d6" }, { label: "d8 (octahedron)", value: "d8" }, { label: "d20 (icosahedron)", value: "d20" }], default: "d20" },
+      { key: "count", label: "Dice count", type: "range", min: 1, max: 6, step: 1, default: 3 },
+      { key: "spinSpeed", label: "Spin speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "spinDir", label: "Spin direction", type: "select", options: [{ label: "Forward", value: "forward" }, { label: "Reverse", value: "reverse" }], default: "forward" },
+      { key: "metalness", label: "Metalness", type: "range", min: 0, max: 1, step: 0.05, default: 0.6 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "single" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 45 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Golden d20", params: { diceType: "d20", count: 1, spinSpeed: 1, spinDir: "forward", metalness: 0.75, colorMode: "single", hue: 45 } },
+      { name: "Cube Trio", params: { diceType: "d6", count: 3, spinSpeed: 1.3, spinDir: "forward", metalness: 0.5, colorMode: "dual", hue: 200, hue2: 320 } },
+      { name: "Spectrum Roll", params: { diceType: "d8", count: 6, spinSpeed: 1.8, spinDir: "reverse", metalness: 0.65, colorMode: "rainbow", hue: 0 } },
+    ],
+  },
+  {
+    slug: "petal-cursor",
+    title: "Petal Cursor",
+    blurb:
+      "Petals stream from your pointer as it moves, then drift down with gentle sway, rotation, and fade. Click for a small burst, and idle petals settle in when the pointer rests.",
+    source: {
+      project: "PetalsAndBloom",
+      path: "src/components/PetalCursor.tsx",
+    },
+    tags: ["Canvas 2D", "pointer-reactive", "cursor", "click", "pooled"],
+    tier: 1,
+    controls: [
+      { key: "shape", label: "Shape", type: "select", options: [{ label: "Petal", value: "petal" }, { label: "Sakura", value: "sakura" }, { label: "Heart", value: "heart" }], default: "petal" },
+      { key: "spawnRate", label: "Spawn rate", type: "range", min: 0.2, max: 4, step: 0.1, default: 1 },
+      { key: "size", label: "Size", type: "range", min: 0.5, max: 2.5, step: 0.1, default: 1 },
+      { key: "fall", label: "Fall speed", type: "range", min: 0.2, max: 3, step: 0.1, default: 1 },
+      { key: "sway", label: "Sway", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 340 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "single" },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 20, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Cherry Blossom", params: { shape: "sakura", spawnRate: 1.4, size: 1.1, fall: 0.8, sway: 1.3, colorMode: "single", hue: 340 } },
+      { name: "Falling Hearts", params: { shape: "heart", spawnRate: 1, size: 1.2, fall: 1, sway: 0.8, colorMode: "dual", hue: 345, hue2: 10 } },
+      { name: "Autumn Drift", params: { shape: "petal", spawnRate: 0.8, size: 1.3, fall: 1.4, sway: 1.6, colorMode: "dual", hue: 30, hue2: 350 } },
+    ],
+  },
+  {
+    slug: "flow-field",
+    title: "Flow Field",
+    blurb:
+      "A fullscreen plane of domain-warped Perlin noise that drifts into flowing color bands. Speed, noise scale, contrast, and swirl reshape the field, while your pointer gently bends it.",
+    source: {
+      project: "VisualDomainTesting",
+      path: "src/Scene.tsx",
+    },
+    tags: ["WebGL", "shader", "noise", "pointer-reactive"],
+    tier: 1,
+    controls: [
+      { key: "speed", label: "Speed", type: "range", min: 0, max: 3, step: 0.05, default: 1 },
+      { key: "scale", label: "Noise scale", type: "range", min: 0.5, max: 6, step: 0.1, default: 2.5 },
+      { key: "contrast", label: "Contrast", type: "range", min: 0.2, max: 3, step: 0.05, default: 1 },
+      { key: "swirl", label: "Swirl", type: "range", min: 0, max: 3, step: 0.05, default: 1.2 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 265 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 195, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Violet Drift", params: { speed: 0.8, scale: 2.5, contrast: 1, swirl: 1.2, colorMode: "dual", hue: 265, hue2: 195 } },
+      { name: "Lava Bands", params: { speed: 1.4, scale: 3.4, contrast: 2.1, swirl: 0.6, colorMode: "dual", hue: 24, hue2: 330 } },
+      { name: "Spectrum Flow", params: { speed: 1, scale: 2, contrast: 1.3, swirl: 1.8, colorMode: "rainbow", hue: 200, hue2: 200 } },
+    ],
+  },
 ];
 
 export function getMeta(slug: string): EffectMeta | undefined {

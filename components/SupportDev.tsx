@@ -47,6 +47,12 @@ export function SupportDev() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    const openHandler = () => setOpen(true);
+    window.addEventListener("open-support", openHandler);
+    return () => window.removeEventListener("open-support", openHandler);
+  }, []);
+
+  useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
@@ -57,16 +63,6 @@ export function SupportDev() {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Support the dev"
-        className="group fixed bottom-5 left-1/2 z-40 inline-flex -translate-x-1/2 items-center gap-2 rounded-full border border-amber-300/40 bg-amber-400/95 px-4 py-2 text-sm font-semibold text-black shadow-[0_8px_30px_rgba(245,200,80,0.35)] backdrop-blur transition hover:bg-amber-300 hover:shadow-[0_10px_40px_rgba(245,200,80,0.5)]"
-      >
-        <CoffeeIcon className="h-4 w-4" />
-        Support the dev
-        <span className="ml-0.5 h-1.5 w-1.5 animate-pulse rounded-full bg-black/40" aria-hidden />
-      </button>
-
       {open && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-bg/70 p-4 backdrop-blur-sm"
@@ -137,7 +133,7 @@ export function SupportDev() {
                   className="flex w-full items-center justify-center gap-2 rounded-md bg-amber-400 px-3 py-2 text-sm font-semibold text-black transition hover:bg-amber-300"
                 >
                   <CoffeeIcon className="h-4 w-4" />
-                  buymeacoffee.com/shanevz
+                  Buy me a coffee
                 </a>
                 <div className="flex gap-2">
                   <a

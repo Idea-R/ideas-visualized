@@ -59,6 +59,14 @@ import { NexusCard } from "./nexus-card";
 import { ParticleMorph } from "./particle-morph";
 import { NebulaCloud } from "./nebula-cloud";
 import { AuroraVeil } from "./aurora-veil";
+import { TestimonialGlobe } from "./testimonial-globe";
+import { ElectricShader } from "./electric-shader";
+import { ArcaneSpells } from "./arcane-spells";
+import { ButterflyGarden } from "./butterfly-garden";
+import { WatercolorReveal } from "./watercolor-reveal";
+import { Dice3D } from "./dice-3d";
+import { PetalCursor } from "./petal-cursor";
+import { FlowField } from "./flow-field";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -120,6 +128,14 @@ export const effectComponents: Record<string, EffectComponent> = {
   "particle-morph": ParticleMorph,
   "nebula-cloud": NebulaCloud,
   "aurora-veil": AuroraVeil,
+  "testimonial-globe": TestimonialGlobe,
+  "electric-shader": ElectricShader,
+  "arcane-spells": ArcaneSpells,
+  "butterfly-garden": ButterflyGarden,
+  "watercolor-reveal": WatercolorReveal,
+  "dice-3d": Dice3D,
+  "petal-cursor": PetalCursor,
+  "flow-field": FlowField,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {
