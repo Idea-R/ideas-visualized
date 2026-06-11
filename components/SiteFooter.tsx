@@ -4,9 +4,7 @@ const SITE_URL = "https://ideas-realized.com";
 const REPO_URL = "https://github.com/Idea-R/ideas-visualized";
 const LINKEDIN_URL = "https://www.linkedin.com/in/ideasrealized";
 const X_URL = "https://x.com/xentrilo";
-// Set this when the Buy Me a Coffee URL is provided. The button only renders
-// once it has a value, so nothing ships pointing at a broken link.
-const BMC_URL = "";
+const BMC_URL = "https://buymeacoffee.com/shanevz";
 
 function GitHubIcon({ className = "" }: { className?: string }) {
   return (

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SupportDev } from "@/components/SupportDev";
 
 export const metadata: Metadata = {
   title: "Ideas Visualized",
@@ -37,6 +38,7 @@ export default function RootLayout({
         </header>
         {children}
         <SiteFooter />
+        <SupportDev />
       </body>
     </html>
   );
