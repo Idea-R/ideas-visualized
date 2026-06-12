@@ -2010,6 +2010,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "particles", "pointer-reactive", "click", "pooled"],
     tier: 1,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
     controls: [
       { key: "spell", label: "Spell", type: "select", options: [{ label: "Portal", value: "portal" }, { label: "Chain Lightning", value: "chain-lightning" }, { label: "Rune Circle", value: "rune-circle" }], default: "portal" },
       { key: "density", label: "Density", type: "range", min: 0.4, max: 2, step: 0.1, default: 1 },
@@ -2602,6 +2604,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "particles", "click", "pooled", "ambient"],
     tier: 2,
+    category: "game-asset",
+    gameGroup: "Traps & Portals",
     controls: [
       { key: "clouds", label: "Clouds", type: "range", min: 1, max: 8, step: 1, default: 4 },
       { key: "drift", label: "Drift", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
@@ -2637,6 +2641,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "beam", "click", "pooled", "glow"],
     tier: 2,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
     controls: [
       { key: "beamWidth", label: "Beam width", type: "range", min: 1, max: 12, step: 0.5, default: 4 },
       { key: "fadeSpeed", label: "Fade speed", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
@@ -2672,6 +2678,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "click", "pooled", "organic"],
     tier: 2,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
     controls: [
       { key: "thickness", label: "Thickness", type: "range", min: 6, max: 30, step: 1, default: 16 },
       { key: "wobble", label: "Wobble", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
