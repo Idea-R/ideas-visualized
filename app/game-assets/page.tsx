@@ -6,6 +6,7 @@ export const metadata = { title: "Game Assets · Ideas Visualized" };
 
 const GROUP_ORDER = [
   "Combat / Spells",
+  "Explosions & Impact",
   "Environment & Weather",
   "Traps & Portals",
   "Lighting",

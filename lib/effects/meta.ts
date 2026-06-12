@@ -154,6 +154,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "click", "pooled", "lightning"],
     tier: 1,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
     controls: [
       { key: "branches", label: "Branches", type: "range", min: 0, max: 5, step: 1, default: 2 },
       { key: "jitter", label: "Jitter", type: "range", min: 4, max: 40, step: 1, default: 16 },
@@ -372,6 +374,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "particles", "explosion", "click", "pooled"],
     tier: 1,
+    category: "game-asset",
+    gameGroup: "Explosions & Impact",
     controls: [
       { key: "density", label: "Dots", type: "range", min: 60, max: 400, step: 10, default: 240 },
       { key: "shards", label: "Shards", type: "range", min: 0, max: 60, step: 2, default: 36 },
@@ -407,6 +411,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "explosion", "click", "geometric", "pooled"],
     tier: 1,
+    category: "game-asset",
+    gameGroup: "Explosions & Impact",
     controls: [
       { key: "count", label: "Shards", type: "range", min: 8, max: 60, step: 2, default: 24 },
       { key: "power", label: "Power", type: "range", min: 100, max: 500, step: 10, default: 280 },
@@ -673,6 +679,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "geometric", "rings", "additive", "click"],
     tier: 1,
+    category: "game-asset",
+    gameGroup: "Explosions & Impact",
     controls: [
       {
         key: "shape",
@@ -776,6 +784,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["Canvas 2D", "particles", "impact", "comet", "pooled", "click"],
     tier: 1,
+    category: "game-asset",
+    gameGroup: "Explosions & Impact",
     controls: [
       { key: "spiral", label: "Spiral", type: "range", min: 0, max: 3, step: 0.1, default: 1.2 },
       { key: "trail", label: "Trail length", type: "range", min: 6, max: 40, step: 2, default: 24 },
@@ -1478,6 +1488,8 @@ export const effectsMeta: EffectMeta[] = [
     },
     tags: ["explosion", "chain", "electric", "particles", "canvas", "click"],
     tier: 1,
+    category: "game-asset",
+    gameGroup: "Explosions & Impact",
     controls: [
       { key: "chainLength", label: "Chain length", type: "range", min: 2, max: 14, step: 1, default: 7 },
       { key: "blastPower", label: "Blast power", type: "range", min: 0.5, max: 4, step: 0.1, default: 2 },
@@ -1721,6 +1733,8 @@ export const effectsMeta: EffectMeta[] = [
     source: { project: "aVOID", path: "components/effects/charge-burst/index.tsx" },
     tags: ["Canvas 2D", "click", "charge", "hold", "particles", "pointer"],
     tier: 1,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
     controls: [
       { key: "chargeTime", label: "Charge time (s)", type: "range", min: 0.4, max: 3, step: 0.1, default: 1.2 },
       { key: "burstSize", label: "Burst size", type: "range", min: 40, max: 320, step: 10, default: 140 },
