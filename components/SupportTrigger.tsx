@@ -10,7 +10,20 @@ function CoffeeIcon({ className = "" }: { className?: string }) {
   );
 }
 
-export function SupportTrigger() {
+export function SupportTrigger({ compact = false }: { compact?: boolean }) {
+  if (compact) {
+    return (
+      <button
+        onClick={() => window.dispatchEvent(new Event("open-support"))}
+        aria-label="Support the dev"
+        className="inline-flex items-center gap-1.5 rounded-md bg-amber-400/90 px-2.5 py-1.5 text-xs font-semibold text-black transition hover:bg-amber-300"
+      >
+        <CoffeeIcon className="h-3.5 w-3.5" />
+        <span className="hidden sm:inline">Support</span>
+      </button>
+    );
+  }
+
   return (
     <button
       onClick={() => window.dispatchEvent(new Event("open-support"))}
