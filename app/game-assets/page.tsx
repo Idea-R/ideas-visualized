@@ -1,5 +1,6 @@
 import { effectsMeta } from "@/lib/effects/meta";
 import { EffectCard } from "@/components/EffectCard";
+import { SpellDuel } from "@/components/games/SpellDuel";
 
 export const metadata = { title: "Game Assets · Ideas Visualized" };
 
@@ -34,6 +35,10 @@ export default function GameAssetsPage() {
         weather, traps, lighting, and level atmosphere. Pick a variant on each
         tile to cycle through the set.
       </p>
+
+      <div className="mt-8">
+        <SpellDuel />
+      </div>
 
       {assets.length === 0 ? (
         <p className="mt-12 text-sm text-muted">Game assets land here soon.</p>
