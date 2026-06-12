@@ -2414,6 +2414,183 @@ export const effectsMeta: EffectMeta[] = [
       { name: "Ember Dual", params: { count: 80, separation: 0.8, drift: 0.7, colorMode: "dual", hue: 30, hue2: 320 } },
     ],
   },
+  {
+    slug: "comic-smoke",
+    title: "Comic Smoke",
+    blurb:
+      "Layered comic-book smoke puffs with inked scalloped edges rise from the base, billow, and dissipate on a loop. Click to puff a cluster at the pointer.",
+    source: {
+      project: "PromptPromptPass",
+      path: "src/components/effects/ComicSmoke.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "smoke", "comic", "click", "pooled"],
+    tier: 2,
+    controls: [
+      { key: "density", label: "Density", type: "range", min: 4, max: 40, step: 1, default: 16 },
+      { key: "speed", label: "Speed", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "size", label: "Size", type: "range", min: 0.5, max: 2, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "single" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 210 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 30, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Steam", params: { density: 16, speed: 1, size: 1, colorMode: "single", hue: 210 } },
+      { name: "Hot & Cold", params: { density: 22, speed: 1.2, size: 1.1, colorMode: "dual", hue: 200, hue2: 30 } },
+      { name: "Cartoon Pop", params: { density: 28, speed: 1.4, size: 1.2, colorMode: "rainbow", hue: 210 } },
+    ],
+  },
+  {
+    slug: "logo-burst",
+    title: "Logo Burst",
+    blurb:
+      "A celebratory reveal burst: radiating rays, a flying spark shower, and an expanding shockwave ring fire on a loop at center. Click to set one off at the pointer.",
+    source: {
+      project: "PromptPromptPass",
+      path: "src/components/effects/EasterEggEffect.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "burst", "celebration", "click", "pooled"],
+    tier: 2,
+    controls: [
+      { key: "density", label: "Particles", type: "range", min: 20, max: 200, step: 5, default: 90 },
+      { key: "speed", label: "Speed", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "spread", label: "Spread", type: "range", min: 0.4, max: 2, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "rainbow" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 45 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 320, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Confetti Pop", params: { density: 120, speed: 1, spread: 1.1, colorMode: "rainbow", hue: 45 } },
+      { name: "Gold Fanfare", params: { density: 90, speed: 1, spread: 1, colorMode: "single", hue: 45 } },
+      { name: "Festival", params: { density: 140, speed: 1.3, spread: 1.3, colorMode: "dual", hue: 200, hue2: 320 } },
+    ],
+  },
+  {
+    slug: "energy-flow",
+    title: "Energy Flow",
+    blurb:
+      "Glowing particles ride several flowing curves across the canvas, leaving soft additive trails. The cursor bends nearby streams toward it.",
+    source: {
+      project: "Leap-li-landing",
+      path: "src/components/ui/EnergyFlow.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "pointer-reactive", "pooled", "trails"],
+    tier: 2,
+    controls: [
+      { key: "count", label: "Density", type: "range", min: 40, max: 600, step: 10, default: 220 },
+      { key: "speed", label: "Speed", type: "range", min: 0.1, max: 3, step: 0.1, default: 1 },
+      { key: "thickness", label: "Thickness", type: "range", min: 0.5, max: 4, step: 0.1, default: 1.6 },
+      { key: "streams", label: "Streams", type: "range", min: 2, max: 10, step: 1, default: 5 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 200 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 320, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Aurora Streams", params: { count: 220, speed: 1, thickness: 1.6, streams: 5, colorMode: "dual", hue: 200, hue2: 320 } },
+      { name: "Plasma Rush", params: { count: 420, speed: 2.1, thickness: 2.2, streams: 7, colorMode: "single", hue: 290 } },
+      { name: "Spectrum Flow", params: { count: 320, speed: 1.3, thickness: 1.4, streams: 8, colorMode: "rainbow", hue: 200 } },
+    ],
+  },
+  {
+    slug: "text-reveal",
+    title: "Text Reveal",
+    blurb:
+      "Type a phrase and watch it animate in character by character with a staggered reveal, hold, then replay on a loop. Pick from fade-up, wave, blur-in, scale-in, typewriter, or slide-in. Click to replay instantly.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/components/gallery/TextAnimations.tsx",
+    },
+    tags: ["Canvas 2D", "text", "typography", "reveal", "stagger"],
+    tier: 2,
+    controls: [
+      {
+        key: "text",
+        label: "Text",
+        type: "text",
+        maxLength: 24,
+        placeholder: "Type a phrase\u2026",
+        default: "Ideas Visualized",
+      },
+      {
+        key: "animation",
+        label: "Animation",
+        type: "select",
+        options: [
+          { label: "Fade up", value: "fade-up" },
+          { label: "Wave", value: "wave" },
+          { label: "Blur in", value: "blur-in" },
+          { label: "Scale in", value: "scale-in" },
+          { label: "Typewriter", value: "typewriter" },
+          { label: "Slide in", value: "slide-in" },
+        ],
+        default: "fade-up",
+      },
+      { key: "speed", label: "Speed", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "stagger", label: "Stagger", type: "range", min: 0.01, max: 0.15, step: 0.01, default: 0.05 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Ideas Realized", params: { text: "Ideas Visualized", animation: "fade-up", speed: 1, stagger: 0.05, colorMode: "single", hue: 190, hue2: 300 } },
+      { name: "Neon Wave", params: { text: "Make It Move", animation: "wave", speed: 1.2, stagger: 0.06, colorMode: "dual", hue: 280, hue2: 190 } },
+      { name: "Terminal", params: { text: "Hello World", animation: "typewriter", speed: 1, stagger: 0.08, colorMode: "rainbow", hue: 190, hue2: 300 } },
+    ],
+  },
+  {
+    slug: "prism-burst",
+    title: "Prism Burst",
+    blurb:
+      "A spectral burst of refracted light shards, a fan of prismatic sparks, and an expanding chromatic ring. Fires on a loop at center and again wherever you click.",
+    source: {
+      project: "IdeasRealized",
+      path: "Site showcase/grand-showcase/src/components/shared/EasterEggs.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "click", "pooled", "glow"],
+    tier: 2,
+    controls: [
+      { key: "particles", label: "Density", type: "range", min: 8, max: 60, step: 1, default: 26 },
+      { key: "speed", label: "Speed", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "spread", label: "Spread", type: "range", min: 0.4, max: 2, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "rainbow",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 280 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 190, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Spectrum", params: { particles: 32, speed: 1, spread: 1.2, colorMode: "rainbow", hue: 280 } },
+      { name: "Violet Flare", params: { particles: 20, speed: 1.4, spread: 0.9, colorMode: "single", hue: 290 } },
+      { name: "Ice & Fire", params: { particles: 40, speed: 1.1, spread: 1.4, colorMode: "dual", hue: 30, hue2: 200 } },
+    ],
+  },
 ];
 
 export function getMeta(slug: string): EffectMeta | undefined {

@@ -74,6 +74,11 @@ import { TorchFlame } from "./torch-flame";
 import { DungeonScenes } from "./dungeon-scenes";
 import { TierAtmosphere } from "./tier-atmosphere";
 import { ParallaxDepth } from "./parallax-depth";
+import { ComicSmoke } from "./comic-smoke";
+import { LogoBurst } from "./logo-burst";
+import { EnergyFlow } from "./energy-flow";
+import { TextReveal } from "./text-reveal";
+import { PrismBurst } from "./prism-burst";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -150,6 +155,11 @@ export const effectComponents: Record<string, EffectComponent> = {
   "dungeon-scenes": DungeonScenes,
   "tier-atmosphere": TierAtmosphere,
   "parallax-depth": ParallaxDepth,
+  "comic-smoke": ComicSmoke,
+  "logo-burst": LogoBurst,
+  "energy-flow": EnergyFlow,
+  "text-reveal": TextReveal,
+  "prism-burst": PrismBurst,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {
