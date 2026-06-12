@@ -2591,6 +2591,231 @@ export const effectsMeta: EffectMeta[] = [
       { name: "Ice & Fire", params: { particles: 40, speed: 1.1, spread: 1.4, colorMode: "dual", hue: 30, hue2: 200 } },
     ],
   },
+  {
+    slug: "poison-cloud",
+    title: "Poison Cloud",
+    blurb:
+      "Drifting clusters of overlapping green blobs that orbit and pulse, with little bubble wisps that rise, swell, and pop. It fills the field on its own and spawns a fresh cloud wherever you click.",
+    source: {
+      project: "TOWERDEF",
+      path: "src/systems/DefensiveUnits.ts",
+    },
+    tags: ["Canvas 2D", "particles", "click", "pooled", "ambient"],
+    tier: 2,
+    controls: [
+      { key: "clouds", label: "Clouds", type: "range", min: 1, max: 8, step: 1, default: 4 },
+      { key: "drift", label: "Drift", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
+      { key: "bubbleRate", label: "Bubbles", type: "range", min: 0, max: 3, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 120 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 90, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Toxic", params: { clouds: 4, drift: 1, bubbleRate: 1, colorMode: "single", hue: 120 } },
+      { name: "Swamp", params: { clouds: 6, drift: 0.6, bubbleRate: 1.4, colorMode: "dual", hue: 95, hue2: 60 } },
+      { name: "Radioactive", params: { clouds: 5, drift: 1.4, bubbleRate: 2, colorMode: "dual", hue: 80, hue2: 150 } },
+    ],
+  },
+  {
+    slug: "laser-beam",
+    title: "Piercing Laser Beam",
+    blurb:
+      "Straight, white-hot energy beams that snap from the edges and center toward moving targets, each with a colored glow halo and a bright spark flare where it lands. Fires on a loop and again wherever you click.",
+    source: {
+      project: "Phase",
+      path: "src/objects/towers/LaserTower.js",
+    },
+    tags: ["Canvas 2D", "beam", "click", "pooled", "glow"],
+    tier: 2,
+    controls: [
+      { key: "beamWidth", label: "Beam width", type: "range", min: 1, max: 12, step: 0.5, default: 4 },
+      { key: "fadeSpeed", label: "Fade speed", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "fireRate", label: "Fire rate", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 325 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Hot Pink", params: { beamWidth: 4, fadeSpeed: 1, fireRate: 1, colorMode: "single", hue: 325 } },
+      { name: "Plasma", params: { beamWidth: 5, fadeSpeed: 1.3, fireRate: 1.6, colorMode: "dual", hue: 285, hue2: 190 } },
+      { name: "Emerald", params: { beamWidth: 3, fadeSpeed: 0.9, fireRate: 1.2, colorMode: "single", hue: 150 } },
+    ],
+  },
+  {
+    slug: "tentacle-lash",
+    title: "Tentacle Lash",
+    blurb:
+      "A thick, tapering tentacle whips out from the edge with a wobbling curve and a row of suckers, grabs and pulses, then retracts and dissolves. It hunts drifting prey on its own and lashes toward your click.",
+    source: {
+      project: "Phase",
+      path: "src/objects/towers/TentacleTower.js",
+    },
+    tags: ["Canvas 2D", "click", "pooled", "organic"],
+    tier: 2,
+    controls: [
+      { key: "thickness", label: "Thickness", type: "range", min: 6, max: 30, step: 1, default: 16 },
+      { key: "wobble", label: "Wobble", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
+      { key: "lashSpeed", label: "Lash speed", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "curve", label: "Curve", type: "range", min: 0, max: 0.8, step: 0.05, default: 0.35 },
+      { key: "suckers", label: "Suckers", type: "toggle", default: true },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 285 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Kraken", params: { thickness: 18, wobble: 1, lashSpeed: 1, curve: 0.35, suckers: true, colorMode: "single", hue: 285 } },
+      { name: "Venom", params: { thickness: 14, wobble: 1.6, lashSpeed: 1.5, curve: 0.45, suckers: true, colorMode: "dual", hue: 120, hue2: 280 } },
+      { name: "Abyssal", params: { thickness: 22, wobble: 0.7, lashSpeed: 0.8, curve: 0.25, suckers: false, colorMode: "dual", hue: 200, hue2: 260 } },
+    ],
+  },
+  {
+    slug: "neon-spores",
+    title: "Neon Spores",
+    blurb:
+      "A deep field of glowing spores drifting across three depth layers, pushed by gusting wind and trailing soft light, with the odd pollen burst. Your cursor swirls the ones nearby and a click pops a burst.",
+    source: {
+      project: "IdeasRealized",
+      path: "grand-showcase/src/showcases/neon-terrain/components/TerrainAnimations.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "parallax", "pointer-reactive", "pooled"],
+    tier: 2,
+    controls: [
+      { key: "density", label: "Density", type: "range", min: 0.3, max: 2.5, step: 0.1, default: 1 },
+      { key: "wind", label: "Wind", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
+      { key: "speed", label: "Drift speed", type: "range", min: 0.2, max: 2.5, step: 0.1, default: 1 },
+      { key: "glow", label: "Glow", type: "range", min: 0, max: 2, step: 0.05, default: 1 },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "dual",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 160 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 280, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Bioluminescent", params: { density: 1, wind: 1, speed: 1, glow: 1, colorMode: "dual", hue: 160, hue2: 280 } },
+      { name: "Toxic", params: { density: 1.4, wind: 1.4, speed: 1.2, glow: 1.2, colorMode: "single", hue: 110 } },
+      { name: "Aurora", params: { density: 0.9, wind: 0.7, speed: 0.8, glow: 1.4, colorMode: "rainbow", hue: 160 } },
+    ],
+  },
+  {
+    slug: "speed-lines",
+    title: "Anime Speed Lines",
+    blurb:
+      "Manga action streaks that race across the frame. Radial mode leaves a clear center and lines converging inward, horizontal mode sweeps sideways, and a click sets the focus and flicks out an ink splat.",
+    source: {
+      project: "IdeasRealized",
+      path: "grand-showcase/src/showcases/anime-founder/components/AnimeAnimations.tsx",
+    },
+    tags: ["Canvas 2D", "click", "pooled", "motion"],
+    tier: 2,
+    controls: [
+      {
+        key: "mode",
+        label: "Mode",
+        type: "select",
+        options: [
+          { label: "Radial", value: "radial" },
+          { label: "Horizontal", value: "horizontal" },
+        ],
+        default: "radial",
+      },
+      { key: "density", label: "Density", type: "range", min: 10, max: 160, step: 1, default: 60 },
+      { key: "speed", label: "Speed", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "thickness", label: "Thickness", type: "range", min: 1, max: 6, step: 0.5, default: 2 },
+      { key: "ink", label: "Ink splats", type: "toggle", default: true },
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 0 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 210, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Manga", params: { mode: "radial", density: 70, speed: 1, thickness: 2, ink: true, colorMode: "single", hue: 0 } },
+      { name: "Action", params: { mode: "horizontal", density: 90, speed: 1.6, thickness: 2.5, ink: true, colorMode: "single", hue: 0 } },
+      { name: "Neon Rush", params: { mode: "radial", density: 100, speed: 1.8, thickness: 2, ink: true, colorMode: "rainbow", hue: 0 } },
+    ],
+  },
+  {
+    slug: "holo-scan",
+    title: "Holographic Scan Card",
+    blurb:
+      "A 3D-tilted glassy card that mimics an AI generating an infographic. Depth-parallax layers, chart bars that grow and cycle, soft pulsing glow orbs, and a bright beam that scans top to bottom with a trailing light wash. The card leans toward your cursor and keeps a gentle float when left alone.",
+    source: {
+      project: "FigGlow",
+      path: "arc-memory-carousel-ds/components/marketing/infographic-preview.tsx",
+    },
+    tags: ["CSS/DOM", "3D", "parallax", "pointer-reactive", "glassmorphism"],
+    tier: 2,
+    controls: [
+      {
+        key: "colorMode",
+        label: "Color",
+        type: "select",
+        options: [
+          { label: "Single", value: "single" },
+          { label: "Dual", value: "dual" },
+          { label: "Rainbow", value: "rainbow" },
+        ],
+        default: "single",
+      },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 190 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 300, showIf: { key: "colorMode", in: ["dual"] } },
+      { key: "scanSpeed", label: "Scan speed", type: "range", min: 0.25, max: 3, step: 0.05, default: 1 },
+      { key: "tilt", label: "Tilt strength", type: "range", min: 0, max: 2, step: 0.05, default: 1 },
+      { key: "bars", label: "Chart bars", type: "range", min: 3, max: 8, step: 1, default: 4 },
+      { key: "glow", label: "Glow", type: "range", min: 0, max: 1.5, step: 0.05, default: 1 },
+    ],
+    presets: [
+      { name: "Cyber", params: { colorMode: "single", hue: 190, scanSpeed: 1, tilt: 1, bars: 4, glow: 1 } },
+      { name: "Hologram", params: { colorMode: "dual", hue: 175, hue2: 265, scanSpeed: 1.4, tilt: 1.3, bars: 6, glow: 1.2 } },
+      { name: "Magenta", params: { colorMode: "dual", hue: 315, hue2: 25, scanSpeed: 0.8, tilt: 0.8, bars: 5, glow: 1.1 } },
+    ],
+  },
 ];
 
 export function getMeta(slug: string): EffectMeta | undefined {

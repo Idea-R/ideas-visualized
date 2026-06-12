@@ -79,6 +79,12 @@ import { LogoBurst } from "./logo-burst";
 import { EnergyFlow } from "./energy-flow";
 import { TextReveal } from "./text-reveal";
 import { PrismBurst } from "./prism-burst";
+import { PoisonCloud } from "./poison-cloud";
+import { LaserBeam } from "./laser-beam";
+import { TentacleLash } from "./tentacle-lash";
+import { NeonSpores } from "./neon-spores";
+import { SpeedLines } from "./speed-lines";
+import { HoloScan } from "./holo-scan";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -160,6 +166,12 @@ export const effectComponents: Record<string, EffectComponent> = {
   "energy-flow": EnergyFlow,
   "text-reveal": TextReveal,
   "prism-burst": PrismBurst,
+  "poison-cloud": PoisonCloud,
+  "laser-beam": LaserBeam,
+  "tentacle-lash": TentacleLash,
+  "neon-spores": NeonSpores,
+  "speed-lines": SpeedLines,
+  "holo-scan": HoloScan,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {
