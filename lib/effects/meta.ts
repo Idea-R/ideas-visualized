@@ -2838,6 +2838,90 @@ export const effectsMeta: EffectMeta[] = [
       { name: "Magenta", params: { colorMode: "dual", hue: 315, hue2: 25, scanSpeed: 0.8, tilt: 0.8, bars: 5, glow: 1.1 } },
     ],
   },
+  {
+    slug: "homing-missile",
+    title: "Homing Missile Trail",
+    blurb:
+      "Guided rockets launch from the screen edge and curve toward drifting target motes, trailing a glowing fading streak and a dashed lock-on line, then pop in a small impact burst on arrival. Auto-launches on a loop. Click to set an aim point and missiles home to your pointer and detonate there.",
+    source: {
+      project: "TankAVOIDz",
+      path: "src/entities/Projectile.ts",
+    },
+    tags: ["Canvas 2D", "missile", "homing", "trail", "pooled", "click"],
+    tier: 2,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
+    controls: [
+      { key: "count", label: "Missiles per launch", type: "range", min: 1, max: 6, step: 1, default: 2 },
+      { key: "rate", label: "Launch rate", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "speed", label: "Speed", type: "range", min: 0.4, max: 2.5, step: 0.1, default: 1 },
+      { key: "agility", label: "Turn rate", type: "range", min: 0.4, max: 3, step: 0.1, default: 1 },
+      { key: "trail", label: "Trail length", type: "range", min: 6, max: 60, step: 2, default: 24 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "single" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 30 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 200, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Swarm", params: { count: 5, rate: 2.2, speed: 1.3, agility: 1.8, trail: 18, colorMode: "rainbow", hue: 30 } },
+      { name: "Cruise", params: { count: 2, rate: 0.8, speed: 0.8, agility: 0.7, trail: 44, colorMode: "single", hue: 30 } },
+      { name: "Interceptor", params: { count: 3, rate: 1.4, speed: 1.8, agility: 2.6, trail: 26, colorMode: "dual", hue: 18, hue2: 200 } },
+    ],
+  },
+  {
+    slug: "frost-nova",
+    title: "Frost Nova",
+    blurb:
+      "A freeze blast that throws out tapered ice crystals, two expanding frost rings, and a cold central flash, then glittering frost drifts outward, settles, and snows back down. Auto-pulses at the center. Click to set off a fresh nova at your pointer.",
+    source: {
+      project: "Ideas Visualized",
+      path: "components/effects/frost-nova/index.tsx",
+    },
+    tags: ["Canvas 2D", "particles", "ice", "burst", "pooled", "click"],
+    tier: 2,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
+    controls: [
+      { key: "shards", label: "Ice shards", type: "range", min: 6, max: 48, step: 1, default: 18 },
+      { key: "power", label: "Blast power", type: "range", min: 0.5, max: 2, step: 0.1, default: 1 },
+      { key: "ringSpeed", label: "Ring speed", type: "range", min: 0.4, max: 2, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 195 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 215, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Frostbite", params: { shards: 18, power: 1, ringSpeed: 1, colorMode: "dual", hue: 195, hue2: 215 } },
+      { name: "Blizzard", params: { shards: 34, power: 1.5, ringSpeed: 1.4, colorMode: "single", hue: 205 } },
+      { name: "Arcane Ice", params: { shards: 22, power: 1.2, ringSpeed: 1, colorMode: "dual", hue: 185, hue2: 280 } },
+    ],
+  },
+  {
+    slug: "flame-jet",
+    title: "Flame Jet",
+    blurb:
+      "A continuous jet of fire streams from the lower left and aims at your cursor, cooling from a white-hot core to yellow tips while shedding rising embers and thinning smoke. It sweeps slowly on its own when idle. Click to snap the aim and surge the flame.",
+    source: {
+      project: "Phase",
+      path: "src/objects/towers",
+    },
+    tags: ["Canvas 2D", "fire", "pointer-reactive", "pooled", "additive"],
+    tier: 2,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
+    controls: [
+      { key: "intensity", label: "Intensity", type: "range", min: 0.3, max: 2, step: 0.1, default: 1 },
+      { key: "reach", label: "Reach", type: "range", min: 0.5, max: 1.6, step: 0.1, default: 1 },
+      { key: "spread", label: "Spread", type: "range", min: 0.1, max: 0.7, step: 0.02, default: 0.32 },
+      { key: "embers", label: "Embers", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 18 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 45, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Flamethrower", params: { intensity: 1.2, reach: 1, spread: 0.3, embers: 1, colorMode: "dual", hue: 18, hue2: 45 } },
+      { name: "Dragon Breath", params: { intensity: 1.8, reach: 1.4, spread: 0.42, embers: 1.6, colorMode: "dual", hue: 10, hue2: 40 } },
+      { name: "Plasma", params: { intensity: 1.3, reach: 1.2, spread: 0.28, embers: 0.8, colorMode: "rainbow", hue: 200 } },
+    ],
+  },
 ];
 
 export function getMeta(slug: string): EffectMeta | undefined {

@@ -85,6 +85,9 @@ import { TentacleLash } from "./tentacle-lash";
 import { NeonSpores } from "./neon-spores";
 import { SpeedLines } from "./speed-lines";
 import { HoloScan } from "./holo-scan";
+import { HomingMissile } from "./homing-missile";
+import { FrostNova } from "./frost-nova";
+import { FlameJet } from "./flame-jet";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -172,6 +175,9 @@ export const effectComponents: Record<string, EffectComponent> = {
   "neon-spores": NeonSpores,
   "speed-lines": SpeedLines,
   "holo-scan": HoloScan,
+  "homing-missile": HomingMissile,
+  "frost-nova": FrostNova,
+  "flame-jet": FlameJet,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {
