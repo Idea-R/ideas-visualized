@@ -67,6 +67,13 @@ import { WatercolorReveal } from "./watercolor-reveal";
 import { Dice3D } from "./dice-3d";
 import { PetalCursor } from "./petal-cursor";
 import { FlowField } from "./flow-field";
+import { CombatVfx } from "./combat-vfx";
+import { DungeonWeather } from "./dungeon-weather";
+import { TrapsPortals } from "./traps-portals";
+import { TorchFlame } from "./torch-flame";
+import { DungeonScenes } from "./dungeon-scenes";
+import { TierAtmosphere } from "./tier-atmosphere";
+import { ParallaxDepth } from "./parallax-depth";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -136,6 +143,13 @@ export const effectComponents: Record<string, EffectComponent> = {
   "dice-3d": Dice3D,
   "petal-cursor": PetalCursor,
   "flow-field": FlowField,
+  "combat-vfx": CombatVfx,
+  "dungeon-weather": DungeonWeather,
+  "traps-portals": TrapsPortals,
+  "torch-flame": TorchFlame,
+  "dungeon-scenes": DungeonScenes,
+  "tier-atmosphere": TierAtmosphere,
+  "parallax-depth": ParallaxDepth,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {

@@ -27,6 +27,9 @@ export default function RootLayout({
               <Link href="/gallery" className="hover:text-fg">
                 Gallery
               </Link>
+              <Link href="/game-assets" className="hover:text-fg">
+                Game Assets
+              </Link>
               <Link href="/experiences" className="hover:text-fg">
                 Experiences
               </Link>

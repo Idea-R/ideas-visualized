@@ -48,6 +48,13 @@ export interface EffectMeta {
   };
   tags: string[];
   tier: 1 | 2 | 3;
+  /**
+   * Which listing the effect belongs to. Defaults to "effect" (main Gallery)
+   * when omitted. "game-asset" entries appear on the dedicated Game Assets page.
+   */
+  category?: "effect" | "game-asset";
+  /** Optional sub-section header on the Game Assets page (e.g. "Combat / Spells"). */
+  gameGroup?: string;
   controls: EffectControl[];
   /** Curated looks; merged over defaults when applied. */
   presets?: EffectPreset[];

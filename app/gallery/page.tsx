@@ -18,9 +18,11 @@ export default function GalleryPage() {
         <SurpriseButton />
       </div>
       <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {effectsMeta.map((e) => (
-          <EffectCard key={e.slug} effect={e} />
-        ))}
+        {effectsMeta
+          .filter((e) => e.category !== "game-asset")
+          .map((e) => (
+            <EffectCard key={e.slug} effect={e} />
+          ))}
       </div>
     </main>
   );

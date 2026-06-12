@@ -63,10 +63,14 @@ export function EffectDetail({ slug }: { slug: string }) {
 
   if (!effect || !Comp) return null;
 
+  const isGameAsset = effect.category === "game-asset";
+  const backHref = isGameAsset ? "/game-assets" : "/gallery";
+  const backLabel = isGameAsset ? "← Back to game assets" : "← Back to gallery";
+
   return (
     <main className="mx-auto max-w-6xl px-5 py-10">
-      <Link href="/gallery" className="text-sm text-muted hover:text-fg">
-        ← Back to gallery
+      <Link href={backHref} className="text-sm text-muted hover:text-fg">
+        {backLabel}
       </Link>
 
       <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_340px]">
