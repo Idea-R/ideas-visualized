@@ -2922,6 +2922,90 @@ export const effectsMeta: EffectMeta[] = [
       { name: "Plasma", params: { intensity: 1.3, reach: 1.2, spread: 0.28, embers: 0.8, colorMode: "rainbow", hue: 200 } },
     ],
   },
+  {
+    slug: "shield-parry",
+    title: "Shield Parry",
+    blurb:
+      "A hex energy shield holds the center while bolts streak in from every edge. Each hit is blocked with a bright directional arc, a ripple across the shield, and sparks that ricochet away. Click to send a bolt from your pointer and trigger a block.",
+    source: {
+      project: "Ideas Visualized",
+      path: "components/effects/shield-parry/index.tsx",
+    },
+    tags: ["Canvas 2D", "shield", "click", "pooled", "additive"],
+    tier: 2,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
+    controls: [
+      { key: "incomingRate", label: "Incoming rate", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "boltSpeed", label: "Bolt speed", type: "range", min: 0.4, max: 2.5, step: 0.1, default: 1 },
+      { key: "shieldSize", label: "Shield size", type: "range", min: 0.6, max: 1.6, step: 0.05, default: 1 },
+      { key: "sparkAmount", label: "Sparks", type: "range", min: 6, max: 48, step: 1, default: 20 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "dual" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 205 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 40, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Aegis", params: { incomingRate: 1, boltSpeed: 1, shieldSize: 1, sparkAmount: 20, colorMode: "dual", hue: 205, hue2: 40 } },
+      { name: "Siege", params: { incomingRate: 2.4, boltSpeed: 1.6, shieldSize: 1.1, sparkAmount: 34, colorMode: "dual", hue: 0, hue2: 40 } },
+      { name: "Arc Ward", params: { incomingRate: 1.2, boltSpeed: 1.2, shieldSize: 0.9, sparkAmount: 24, colorMode: "single", hue: 280 } },
+    ],
+  },
+  {
+    slug: "arrow-volley",
+    title: "Arrow Volley",
+    blurb:
+      "A salvo of arrows launches in a fanned spread, arcs across the screen under gravity, and lands with little dust puffs and arrows that stick then fade. Volleys repeat on their own. Click to loose a volley toward your pointer.",
+    source: {
+      project: "Ideas Visualized",
+      path: "components/effects/arrow-volley/index.tsx",
+    },
+    tags: ["Canvas 2D", "projectile", "click", "pooled", "physics"],
+    tier: 2,
+    category: "game-asset",
+    gameGroup: "Combat / Spells",
+    controls: [
+      { key: "arrowsPerVolley", label: "Arrows / volley", type: "range", min: 4, max: 30, step: 1, default: 14 },
+      { key: "power", label: "Launch power", type: "range", min: 0.5, max: 1.8, step: 0.1, default: 1 },
+      { key: "gravity", label: "Arc / gravity", type: "range", min: 0.4, max: 2, step: 0.1, default: 1 },
+      { key: "fireRate", label: "Fire rate", type: "range", min: 0.3, max: 3, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "single" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 40 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 20, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Longbow", params: { arrowsPerVolley: 12, power: 1.2, gravity: 1, fireRate: 0.8, colorMode: "single", hue: 40 } },
+      { name: "Storm of Arrows", params: { arrowsPerVolley: 28, power: 1, gravity: 1.1, fireRate: 2, colorMode: "single", hue: 210 } },
+      { name: "Flaming Volley", params: { arrowsPerVolley: 16, power: 1.3, gravity: 0.9, fireRate: 1.2, colorMode: "dual", hue: 20, hue2: 45 } },
+    ],
+  },
+  {
+    slug: "tank-treads",
+    title: "Tank Tread Marks",
+    blurb:
+      "A top-down vehicle rolls a wandering path and lays paired tank-track cleats that slowly fade behind it, kicking up faint dust. Move your pointer to steer the tank and click to gun the throttle for a dust burst.",
+    source: {
+      project: "TankAVOIDz",
+      path: "src",
+    },
+    tags: ["Canvas 2D", "trail", "pointer-reactive", "pooled", "vehicle"],
+    tier: 2,
+    category: "game-asset",
+    gameGroup: "Level Atmosphere",
+    controls: [
+      { key: "speed", label: "Speed", type: "range", min: 20, max: 160, step: 5, default: 70 },
+      { key: "turnRate", label: "Turn rate", type: "range", min: 0.4, max: 4, step: 0.1, default: 1.6 },
+      { key: "fade", label: "Track fade (s)", type: "range", min: 3, max: 20, step: 1, default: 9 },
+      { key: "dust", label: "Dust", type: "range", min: 0, max: 2.5, step: 0.1, default: 1 },
+      { key: "colorMode", label: "Color", type: "select", options: [{ label: "Single", value: "single" }, { label: "Dual", value: "dual" }, { label: "Rainbow", value: "rainbow" }], default: "single" },
+      { key: "hue", label: "Hue", type: "range", min: 0, max: 360, step: 1, default: 150 },
+      { key: "hue2", label: "Second hue", type: "range", min: 0, max: 360, step: 1, default: 90, showIf: { key: "colorMode", in: ["dual"] } },
+    ],
+    presets: [
+      { name: "Patrol", params: { speed: 70, turnRate: 1.6, fade: 9, dust: 1, colorMode: "single", hue: 150 } },
+      { name: "Drift", params: { speed: 130, turnRate: 3, fade: 6, dust: 1.8, colorMode: "dual", hue: 30, hue2: 200 } },
+      { name: "Convoy", params: { speed: 45, turnRate: 0.8, fade: 16, dust: 0.5, colorMode: "single", hue: 200 } },
+    ],
+  },
 ];
 
 export function getMeta(slug: string): EffectMeta | undefined {

@@ -88,6 +88,9 @@ import { HoloScan } from "./holo-scan";
 import { HomingMissile } from "./homing-missile";
 import { FrostNova } from "./frost-nova";
 import { FlameJet } from "./flame-jet";
+import { ShieldParry } from "./shield-parry";
+import { ArrowVolley } from "./arrow-volley";
+import { TankTreads } from "./tank-treads";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -178,6 +181,9 @@ export const effectComponents: Record<string, EffectComponent> = {
   "homing-missile": HomingMissile,
   "frost-nova": FrostNova,
   "flame-jet": FlameJet,
+  "shield-parry": ShieldParry,
+  "arrow-volley": ArrowVolley,
+  "tank-treads": TankTreads,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {

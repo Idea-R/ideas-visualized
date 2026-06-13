@@ -87,7 +87,7 @@ export function SpellDuel() {
         const s = skeletonRef.current?.getBoundingClientRect();
         const staff =
           w && w.width > 0
-            ? { x: w.left - cr.left + 0.7 * w.width, y: w.top - cr.top + 0.12 * w.height }
+            ? { x: w.left - cr.left + 0.7 * w.width + 18, y: w.top - cr.top + 0.12 * w.height }
             : { x: width * 0.26, y: height * 0.2 };
         const shield =
           s && s.width > 0
