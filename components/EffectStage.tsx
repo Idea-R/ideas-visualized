@@ -53,12 +53,25 @@ export function EffectStage({
             style={{ background: placeholderBg }}
             aria-hidden
           >
-            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/30 text-fg/80 backdrop-blur-sm transition group-hover:scale-110 group-hover:border-accent/50 group-hover:text-accent">
+            {/* Poster still of the effect; gradient above shows through if it 404s. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/posters/${slug}.png`}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
+            <span className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <span className="relative flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-fg/90 backdrop-blur-sm transition group-hover:scale-110 group-hover:border-accent/60 group-hover:text-accent">
               <svg viewBox="0 0 24 24" className="ml-0.5 h-4 w-4" fill="currentColor">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </span>
-            <span className="absolute bottom-2 right-2 text-[10px] uppercase tracking-widest text-muted/70">
+            <span className="absolute bottom-2 right-2 text-[10px] uppercase tracking-widest text-white/60">
               Hover to play
             </span>
           </div>
