@@ -13,7 +13,11 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const effect = getMeta(slug);
-  return { title: effect ? `${effect.title} — Ideas Visualized` : "Effect" };
+  return {
+    title: effect ? `${effect.title} — Ideas Visualized` : "Effect",
+    description: effect?.blurb,
+    alternates: { canonical: `/gallery/${slug}` },
+  };
 }
 
 export default async function EffectPage({

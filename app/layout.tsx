@@ -4,8 +4,10 @@ import "./globals.css";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SupportDev } from "@/components/SupportDev";
 import { SupportTrigger } from "@/components/SupportTrigger";
+import { effectsMeta } from "@/lib/effects/meta";
 
 const REPO_URL = "https://github.com/Idea-R/ideas-visualized";
+const EFFECT_COUNT = effectsMeta.length;
 
 function GitHubIcon({ className = "" }: { className?: string }) {
   return (
@@ -16,9 +18,26 @@ function GitHubIcon({ className = "" }: { className?: string }) {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ideasvisualized.com"),
   title: "Ideas Visualized",
   description:
-    "A gallery of hand-rolled, music-synced visual effects built from scratch with Canvas 2D, Web Audio, and WebGL.",
+    `Explore ${EFFECT_COUNT} hand-rolled interactive effects and game-ready visual experiments built with Canvas 2D, Web Audio, and WebGL.`,
+  applicationName: "Ideas Visualized",
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Ideas Visualized",
+    title: "Ideas Visualized",
+    description:
+      `Live-tune, randomize, and export ${EFFECT_COUNT} hand-rolled visual effects for interfaces, creative coding, and games.`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ideas Visualized",
+    description:
+      `Live-tune, randomize, and export ${EFFECT_COUNT} hand-rolled visual effects for interfaces, creative coding, and games.`,
+  },
+  category: "technology",
 };
 
 export default function RootLayout({

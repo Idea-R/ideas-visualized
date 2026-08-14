@@ -3,9 +3,16 @@ import { effectsMeta } from "@/lib/effects/meta";
 import type { EffectMeta } from "@/lib/effects/types";
 import { EffectStage } from "@/components/EffectStage";
 import { EffectCard } from "@/components/EffectCard";
+import type { Metadata } from "next";
 
 const bySlug = (slug: string): EffectMeta | undefined =>
   effectsMeta.find((e) => e.slug === slug);
+
+const EFFECT_COUNT = effectsMeta.length;
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 // Curated marquee (Canvas 2D so the hero/cards never hijack page scroll the way
 // orbit-zoom WebGL effects would).
@@ -44,7 +51,7 @@ const TIERS = [
 ];
 
 const STATS = [
-  { n: "57", l: "interactive effects" },
+  { n: String(EFFECT_COUNT), l: "interactive effects" },
   { n: "3", l: "render tiers" },
   { n: "0", l: "off-the-shelf engines" },
   { n: "100%", l: "live-controllable" },
@@ -72,7 +79,7 @@ export default function Home() {
             <span className="glow-text">how did they build that?</span>
           </h1>
           <p className="max-w-2xl text-base text-muted sm:text-lg">
-            A living collection of {STATS[0].n} visual effects, built from
+            A living collection of {EFFECT_COUNT} visual effects, built from
             scratch without an off-the-shelf engine. Tune every parameter live,
             roll the dice, then export the code or an AI prompt.
           </p>
@@ -119,7 +126,7 @@ export default function Home() {
             </p>
           </div>
           <Link href="/gallery" className="text-sm text-muted hover:text-fg">
-            View all 57 →
+            View all {EFFECT_COUNT} →
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

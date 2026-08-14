@@ -4,18 +4,18 @@
 
 ### Effects that make people ask *"how did they build that?"*
 
-**57 interactive visual effects across three render tiers: Canvas 2D, pseudo-3D, and true WebGL. Every one is live-controllable, randomizable, and exportable.**
+**89 interactive visual effects and game-ready experiments across Canvas 2D, pseudo-3D, and true WebGL. Every effect is live-controllable, randomizable, and exportable.**
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-ideas--visualized.vercel.app-7c5cff?style=for-the-badge)](https://ideas-visualized.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-ideasvisualized.com-7c5cff?style=for-the-badge)](https://ideasvisualized.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-18e0d8?style=for-the-badge)](./LICENSE)
 
 ![Next.js](https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript&logoColor=white)
 ![React Three Fiber](https://img.shields.io/badge/React_Three_Fiber-black?logo=three.js&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-0b1120?logo=tailwindcss&logoColor=38bdf8)
-![Deployed on Vercel](https://img.shields.io/badge/Vercel-deployed-000?logo=vercel&logoColor=white)
+![Deployed on Netlify](https://img.shields.io/badge/Netlify-deployed-014847?logo=netlify&logoColor=32e6e2)
 
-[**Open the live demo →**](https://ideas-visualized.vercel.app)
+[**Open the live demo →**](https://ideasvisualized.com)
 
 ![Ideas Visualized landing](docs/screenshots/landing.png)
 
@@ -39,7 +39,7 @@ There is no off-the-shelf engine. The work is in the hand-written particle physi
 
 ![Gallery](docs/screenshots/gallery.png)
 
-### 57 effects across three render tiers
+### 89 effects across three render tiers
 
 | Tier | Examples |
 |---|---|
@@ -65,6 +65,7 @@ All WebGL scenes support **orbit / scroll-to-zoom / pan** camera control with bl
 
 ## Beyond the gallery
 
+- Game Assets: combat, spell, weather, impact, and environment effects plus the live Spell Duel showcase.
 - Experiences: Simon Says, a memory game driven by the custom absorption cursor, and Ideas in Motion, a scroll-driven parallax journey.
 - Research: write-ups on the techniques, including how to fix canvas ghosting, when to pool objects, and how to keep particle-heavy scenes fast.
 
@@ -77,21 +78,21 @@ All WebGL scenes support **orbit / scroll-to-zoom / pan** camera control with bl
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # production build
+npm run check    # lint + typecheck + production build
 ```
 
 ## Project structure
 
 ```
-app/                     Routes (gallery, gallery/[slug], experiences, research)
+app/                     Routes (gallery, game assets, experiences, research)
 components/
   effects/<slug>/        One self-contained module per effect
+  effects/registry.tsx   Slug → React component map (client)
   effects/useCanvas2D.ts Shared Canvas 2D harness (clear policy, DPR, pointer, pause)
   effects/three/Stage3D  Shared R3F scaffold (orbit/zoom/pan + bloom)
   EffectDetail.tsx       Interactive view: controls, presets, randomize, export, fullscreen
 lib/effects/
   meta.ts                Server-safe metadata (slug, controls, presets) for every effect
-  registry.tsx           Slug → React component map (client)
   color.ts               Single / Dual / Rainbow palette helpers
 docs/                    Catalog, plan, roadmap, research notes
 ```

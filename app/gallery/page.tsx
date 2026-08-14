@@ -2,7 +2,11 @@ import { effectsMeta } from "@/lib/effects/meta";
 import { EffectCard } from "@/components/EffectCard";
 import { SurpriseButton } from "@/components/SurpriseButton";
 
-export const metadata = { title: "Gallery · Ideas Visualized" };
+export const metadata = {
+  title: "Gallery · Ideas Visualized",
+  description: "Explore live, controllable Canvas 2D and WebGL visual effects, then tune, randomize, or export each one.",
+  alternates: { canonical: "/gallery" },
+};
 
 export default function GalleryPage() {
   return (

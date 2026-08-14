@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-export const metadata = { title: "Experiences · Ideas Visualized" };
+export const metadata = {
+  title: "Experiences · Ideas Visualized",
+  description: "Play interactive visual experiments, games, and scroll-driven scenes built from the Ideas Visualized effect system.",
+  alternates: { canonical: "/experiences" },
+};
 
 const playable = [
   {
