@@ -130,7 +130,7 @@ export function EmberForge({ params }: { params: EffectProps }) {
             spawnBurst(x, y, Math.round((20 + Math.random() * 16) * (0.5 + strike)));
           }
         },
-        draw: (c, dt, t) => {
+        draw: (c, dt, _t) => {
           c.fillStyle = "#05060a";
           c.fillRect(0, 0, width, height);
 

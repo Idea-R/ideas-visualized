@@ -55,7 +55,7 @@ export function EmbedStage({ slug }: { slug: string }) {
 
     let raf = 0;
     const timers: number[] = [];
-    let pointerId = 1;
+    const pointerId = 1;
 
     const fire = (type: string, fx: number, fy: number) => {
       const canvas = document.querySelector("canvas");

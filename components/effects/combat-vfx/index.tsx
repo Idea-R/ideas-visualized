@@ -165,10 +165,6 @@ function hexToHsl(hex: string): [number, number, number] {
   return [h, s * 100, l * 100];
 }
 
-function easeOutCubic(x: number): number {
-  return 1 - Math.pow(1 - x, 3);
-}
-
 // Stub fake targets around a center so multi-target spells render standalone.
 function stubTargets(x: number, y: number, S: number): Pt[] {
   return [

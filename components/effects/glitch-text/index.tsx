@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { EffectProps } from "@/lib/effects/types";
 
 const GLYPHS = "ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789#%&*<>/\\{}[]=+-_!?$";

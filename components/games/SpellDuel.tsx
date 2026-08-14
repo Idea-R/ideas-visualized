@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useCanvas2D } from "@/components/effects/useCanvas2D";
 import { Pool } from "@/lib/effects/pool";
 
@@ -404,17 +405,23 @@ export function SpellDuel() {
 
       <div className="relative aspect-[16/8] min-h-[300px] w-full">
         {/* sprites */}
-        <img
+        <Image
           ref={wizardRef}
           src="/sprites/wizard.png"
           alt="Wizard"
+          width={477}
+          height={905}
+          unoptimized
           draggable={false}
           className="pointer-events-none absolute bottom-0 left-[1%] z-10 h-[94%] w-auto select-none drop-shadow-[0_0_24px_rgba(80,120,255,0.25)] sm:left-[4%]"
         />
-        <img
+        <Image
           ref={skeletonRef}
           src="/sprites/skeleton.png"
           alt="Skeleton knight"
+          width={741}
+          height={898}
+          unoptimized
           draggable={false}
           className="pointer-events-none absolute bottom-0 right-[1%] z-10 h-[96%] w-auto select-none drop-shadow-[0_0_24px_rgba(200,160,60,0.18)] sm:right-[3%]"
         />
