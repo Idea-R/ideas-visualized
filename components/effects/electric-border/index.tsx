@@ -69,7 +69,7 @@ function roundedRectPoint(
   const sh = height - 2 * radius;
   const arc = (Math.PI * radius) / 2;
   const perim = 2 * sw + 2 * sh + 4 * arc;
-  let d = t * perim;
+  const d = t * perim;
   let acc = 0;
 
   if (d <= acc + sw) return { x: left + radius + (d - acc) / sw * sw, y: top };

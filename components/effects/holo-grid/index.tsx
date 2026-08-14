@@ -58,14 +58,12 @@ export function HoloGrid({ params }: { params: EffectProps }) {
       for (let i = 0; i < cap; i++) particles.push(spawn(true));
 
       let scanY = 0;
-      let spawnAcc = 0;
-
       const gridHsl = (t: number, light: number, alpha: number) =>
         `hsla(${Math.round(paletteHue(mode, hue, hue2, t))}, 90%, ${light}%, ${alpha})`;
 
       return {
         clearMode: "full",
-        draw: (c, dt, t) => {
+        draw: (c, dt, _t) => {
           c.fillStyle = "#05060a";
           c.fillRect(0, 0, width, height);
 
@@ -125,7 +123,6 @@ export function HoloGrid({ params }: { params: EffectProps }) {
           c.font = "600 13px ui-monospace, monospace";
           c.textAlign = "center";
           c.textBaseline = "middle";
-          spawnAcc += dt * particleRate * 6;
           for (const p of particles) {
             p.life += dt;
             if (p.life >= p.maxLife || p.y < -20) {

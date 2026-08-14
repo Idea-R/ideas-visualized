@@ -6,6 +6,10 @@ export function generateStaticParams() {
   return effectsMeta.map((e) => ({ slug: e.slug }));
 }
 
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 export default async function EmbedPage({
   params,
 }: {

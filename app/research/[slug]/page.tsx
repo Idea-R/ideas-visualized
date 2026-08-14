@@ -18,6 +18,8 @@ export async function generateMetadata({
     title: article
       ? `${article.title} — Ideas Visualized`
       : "Research — Ideas Visualized",
+    description: article?.blurb,
+    alternates: { canonical: `/research/${slug}` },
   };
 }
 

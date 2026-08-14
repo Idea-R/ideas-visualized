@@ -146,7 +146,7 @@ export function ParticleText({ params }: { params: EffectProps }) {
         onPointer: (x, y, type) => {
           if (type === "down" && phase !== "scatter") beginScatter();
         },
-        draw: (c, dt, t) => {
+        draw: (c, dt, _t) => {
           c.fillStyle = "#05060a";
           c.fillRect(0, 0, width, height);
 

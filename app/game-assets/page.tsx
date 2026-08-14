@@ -2,7 +2,11 @@ import { effectsMeta } from "@/lib/effects/meta";
 import { EffectCard } from "@/components/EffectCard";
 import { SpellDuel } from "@/components/games/SpellDuel";
 
-export const metadata = { title: "Game Assets · Ideas Visualized" };
+export const metadata = {
+  title: "Game Assets · Ideas Visualized",
+  description: "Preview game-ready combat, spell, weather, impact, trap, lighting, and atmosphere effects in the browser.",
+  alternates: { canonical: "/game-assets" },
+};
 
 const GROUP_ORDER = [
   "Combat / Spells",

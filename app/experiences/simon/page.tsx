@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { SimonSays } from "@/components/games/SimonSays";
 
-export const metadata = { title: "Simon Says · Ideas Visualized" };
+export const metadata = {
+  title: "Simon Says · Ideas Visualized",
+  description: "Play a glowing memory game powered by a custom Canvas 2D interaction system.",
+  alternates: { canonical: "/experiences/simon" },
+};
 
 export default function SimonPage() {
   return (

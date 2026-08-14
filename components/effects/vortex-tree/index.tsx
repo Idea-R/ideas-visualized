@@ -13,7 +13,6 @@ const MAX_SHAPES = 600;
 
 // Mixed mode cycles these three geometries across the funnel.
 const KINDS = ["icosahedron", "octahedron", "tetrahedron"] as const;
-type Kind = (typeof KINDS)[number];
 
 type ShapeItem = {
   x: number;

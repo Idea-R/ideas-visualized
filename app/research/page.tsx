@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { articles, sourceDocs } from "@/lib/research";
 
-export const metadata = { title: "Research · Ideas Visualized" };
+export const metadata = {
+  title: "Research · Ideas Visualized",
+  description: "Read practical notes on performant Canvas 2D, WebGL, particle systems, and real-time interactive effects.",
+  alternates: { canonical: "/research" },
+};
 
 export default function ResearchPage() {
   return (

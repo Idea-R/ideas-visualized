@@ -222,7 +222,7 @@ function drawWarriorForge(c: CanvasRenderingContext2D, time: number) {
   c.globalAlpha = 1;
 }
 
-function drawRogueAlley(c: CanvasRenderingContext2D, time: number) {
+function drawRogueAlley(c: CanvasRenderingContext2D, _time: number) {
   const grad = c.createLinearGradient(0, 0, 0, H);
   grad.addColorStop(0, "#060812");
   grad.addColorStop(0.3, "#0a0c18");

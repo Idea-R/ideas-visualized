@@ -4,14 +4,16 @@ Where we are and where we're going. The north star: a **credibility / star-power
 showcase** for our repos — a site that, when shared, instantly reads as legit and
 "how did they build that?" impressive.
 
-## Status (done)
-- 57 interactive effects (Canvas 2D · pseudo-3D · true WebGL/R3F) with live
+## Status (August 2026)
+- 89 interactive effects (Canvas 2D · pseudo-3D · true WebGL/R3F) with live
   controls, Single/Dual/Rainbow color modes, curated presets, randomize (+`R`),
   global "Surprise me," code export (AI prompt + React component), expand/fullscreen.
 - Shared harnesses: `useCanvas2D` (crisp clear, DPR, pointer, off-screen pause) and
   `Stage3D` (orbit / scroll-zoom / pan + bloom).
+- Game Assets with combat, spells, impacts, weather, traps, and a live **Spell Duel** showcase.
 - Experiences: **Simon Says** (absorption-cursor game) + **Ideas in Motion** (scroll experience).
-- Research docs; MIT license; live on Vercel; GitHub repo `Idea-R/ideas-visualized`.
+- Research docs; MIT license; canonical site at `ideasvisualized.com`; GitHub repo `Idea-R/ideas-visualized`.
+- Canonical metadata, crawler policy, sitemap, and a repeatable `npm run check` quality gate.
 
 ---
 
@@ -21,7 +23,7 @@ The site works; now make it *land*.
 1. **Landing page glow-up**
    - Full-bleed live signature effect behind the hero (curated marquee effect, not the first registry entry).
    - Sharp headline + value prop, primary/secondary CTAs.
-   - Stats band (57 effects · 3 render tiers · controllable · exportable).
+   - Stats band derived from the effect registry so releases cannot leave the count stale.
    - "Why this beats the inspiration" / feature highlights row.
    - Curated featured-effects grid (the flashiest, hand-picked).
    - Render-tier section (2D / pseudo-3D / WebGL) + Experiences + Research teasers.
@@ -31,9 +33,10 @@ The site works; now make it *land*.
    - Animated GIF / screenshot strip of marquee effects.
    - Categorized effect table, feature tour, perf notes, architecture, "add an effect," contributing, license.
 3. **Social / OG + SEO**
-   - `app/opengraph-image` (and twitter-image) via `next/og` — branded share card.
-   - Per-route metadata (titles/descriptions), `sitemap.ts`, `robots.ts`.
-   - Optional: per-effect OG cards.
+   - [x] Canonical metadata, `sitemap.ts`, and `robots.ts`.
+   - [x] Branded `opengraph-image` and `twitter-image` generated via `next/og`.
+   - [x] Per-effect titles, descriptions, and canonical URLs.
+   - [ ] Optional per-effect visual OG cards.
 
 ## Phase 2 — Marquee content
 4. **Port ONE real music-synced Experience** (the biggest differentiator vs wawa-vfx).
@@ -54,7 +57,7 @@ Candidate ports/new builds (pick ~5 per batch):
 8. **Accessibility**: focus states, keyboard nav for the gallery, aria labels, color-contrast check.
 
 ## Phase 5 — Growth & distribution
-9. **Custom domain** (deferred by request — revisit later).
+9. **Custom domain**: complete at `ideasvisualized.com`; monitor the legacy Vercel hostname as a secondary origin.
 10. **"Embed this effect"**: iframe route + copy-embed snippet.
 11. Analytics, sitemap submission, a `CONTRIBUTING.md`, issue/PR templates.
 
@@ -64,4 +67,4 @@ Candidate ports/new builds (pick ~5 per batch):
 - Build effects in parallel via subagents on the established contracts; integrate
   `meta.ts` + `registry.tsx` centrally to avoid conflicts.
 - Verify every batch: `tsc` + `next build` + lint + headless-Chrome screenshots + live 200s.
-- Commit in focused units; pushes auto-deploy via the connected Vercel project.
+- Commit in focused units; deployment remains a separate, explicitly reviewed step.
