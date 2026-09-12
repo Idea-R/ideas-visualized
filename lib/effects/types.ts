@@ -52,9 +52,16 @@ export interface EffectMeta {
    * Which listing the effect belongs to. Defaults to "effect" (main Gallery)
    * when omitted. "game-asset" entries appear on the dedicated Game Assets page.
    */
-  category?: "effect" | "game-asset";
+  category?: "effect" | "game-asset" | "page-transition";
   /** Optional sub-section header on the Game Assets page (e.g. "Combat / Spells"). */
   gameGroup?: string;
+  /** Optional poster override for effects whose preview is not a PNG. */
+  poster?: string;
+  /** A complete portable demo replaces the generic component-source export. */
+  portableDemo?: {
+    href: string;
+    mode: "transition" | "hover";
+  };
   controls: EffectControl[];
   /** Curated looks; merged over defaults when applied. */
   presets?: EffectPreset[];

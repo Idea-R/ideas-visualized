@@ -1,0 +1,3 @@
+# Preserve the approved source snapshot byte-for-byte across Windows checkouts.
+docs/references/underground-inverse-canvas/theme.js -text
+docs/references/underground-inverse-canvas/theme-transition.css -text

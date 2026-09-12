@@ -6,6 +6,100 @@ import type { EffectMeta } from "./types";
  */
 export const effectsMeta: EffectMeta[] = [
   {
+    slug: "inverse-canvas",
+    title: "Inverse Canvas",
+    blurb:
+      "A field of tiles flips across the page from your chosen origin, revealing the next view through a precise staggered wave.",
+    source: {
+      project: "AI Agency Underground",
+      path: "public/experiments/inverse-canvas/",
+    },
+    tags: ["View Transitions", "tile masks", "pointer-reactive"],
+    tier: 1,
+    category: "page-transition",
+    poster: "/posters/inverse-canvas.svg",
+    portableDemo: {
+      href: "/experiments/inverse-canvas/inverse-canvas.zip",
+      mode: "transition",
+    },
+    controls: [
+      { key: "tileCount", label: "Tile count", type: "range", min: 120, max: 1600, step: 20, default: 520 },
+      { key: "spreadMs", label: "Wave spread (ms)", type: "range", min: 200, max: 1800, step: 20, default: 820 },
+      { key: "flipMs", label: "Tile flip (ms)", type: "range", min: 200, max: 1200, step: 10, default: 490 },
+      { key: "gridMs", label: "Grid settle (ms)", type: "range", min: 0, max: 700, step: 10, default: 280 },
+      {
+        key: "origin",
+        label: "Wave origin",
+        type: "select",
+        options: [
+          { label: "Pointer", value: "pointer" },
+          { label: "Center", value: "center" },
+          { label: "Corner", value: "corner" },
+        ],
+        default: "pointer",
+      },
+      {
+        key: "palette",
+        label: "Palette",
+        type: "select",
+        options: [
+          { label: "Teal", value: "teal" },
+          { label: "Violet", value: "violet" },
+          { label: "Amber", value: "amber" },
+        ],
+        default: "teal",
+      },
+    ],
+    presets: [
+      { name: "AAU Original", params: { tileCount: 520, spreadMs: 820, flipMs: 490, gridMs: 280, origin: "pointer", palette: "teal", hoverRadius: 180, intensity: 0.35 } },
+      { name: "Fine grain", params: { tileCount: 1120, spreadMs: 720, flipMs: 380, gridMs: 160, origin: "pointer", palette: "violet", hoverRadius: 150, intensity: 0.3 } },
+      { name: "Slow wave", params: { tileCount: 440, spreadMs: 1600, flipMs: 900, gridMs: 560, origin: "center", palette: "teal", hoverRadius: 220, intensity: 0.45 } },
+      { name: "Coarse", params: { tileCount: 180, spreadMs: 600, flipMs: 420, gridMs: 120, origin: "corner", palette: "amber", hoverRadius: 240, intensity: 0.5 } },
+    ],
+  },
+  {
+    slug: "pixel-field",
+    title: "Pixel Field",
+    blurb:
+      "A responsive tile field brightens and turns around the pointer, adding depth and motion without taking over the page.",
+    source: {
+      project: "AI Agency Underground",
+      path: "public/experiments/inverse-canvas/",
+    },
+    tags: ["Canvas 2D", "hover background", "pointer-reactive"],
+    tier: 1,
+    category: "page-transition",
+    poster: "/posters/pixel-field.svg",
+    portableDemo: {
+      href: "/experiments/inverse-canvas/inverse-canvas.zip",
+      mode: "hover",
+    },
+    controls: [
+      { key: "tileCount", label: "Tile count", type: "range", min: 120, max: 1600, step: 20, default: 520 },
+      {
+        key: "palette",
+        label: "Palette",
+        type: "select",
+        options: [
+          { label: "Teal", value: "teal" },
+          { label: "Violet", value: "violet" },
+          { label: "Amber", value: "amber" },
+        ],
+        default: "teal",
+      },
+      { key: "hoverRadius", label: "Hover radius", type: "range", min: 80, max: 320, step: 10, default: 180 },
+      { key: "intensity", label: "Intensity", type: "range", min: 0.1, max: 0.8, step: 0.05, default: 0.35 },
+      { key: "spreadMs", label: "Wave spread (ms)", type: "range", min: 200, max: 1800, step: 20, default: 820 },
+      { key: "flipMs", label: "Tile flip (ms)", type: "range", min: 200, max: 1200, step: 10, default: 490 },
+    ],
+    presets: [
+      { name: "AAU Original", params: { tileCount: 520, spreadMs: 820, flipMs: 490, gridMs: 280, origin: "pointer", palette: "teal", hoverRadius: 180, intensity: 0.35 } },
+      { name: "Fine grain", params: { tileCount: 1120, spreadMs: 720, flipMs: 380, gridMs: 160, origin: "pointer", palette: "violet", hoverRadius: 140, intensity: 0.3 } },
+      { name: "Slow wave", params: { tileCount: 440, spreadMs: 1600, flipMs: 900, gridMs: 560, origin: "center", palette: "teal", hoverRadius: 280, intensity: 0.45 } },
+      { name: "Coarse", params: { tileCount: 180, spreadMs: 600, flipMs: 420, gridMs: 120, origin: "corner", palette: "amber", hoverRadius: 230, intensity: 0.5 } },
+    ],
+  },
+  {
     slug: "cursor-attractor",
     title: "Cursor Attractor",
     blurb:

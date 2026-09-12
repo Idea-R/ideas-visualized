@@ -18,7 +18,11 @@ export function EffectCard({ effect }: { effect: EffectMeta }) {
       onBlur={() => setActive(false)}
     >
       <div className="h-56 w-full">
-        <EffectStage slug={effect.slug} active={active} className="h-full w-full" />
+        <EffectStage
+          slug={effect.slug}
+          active={active}
+          className="h-full w-full [&_iframe]:pointer-events-none"
+        />
       </div>
       <div className="space-y-2 p-4">
         <h3 className="text-sm font-semibold">{effect.title}</h3>

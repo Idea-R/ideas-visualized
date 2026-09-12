@@ -1,0 +1,25 @@
+.site-header{gap:12px}
+.membership-price span{letter-spacing:normal}
+.site-header .wordmark{margin-right:auto}
+.site-header nav{order:2}
+.theme-toggle{order:3;flex:0 0 44px;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--line);background:transparent;color:var(--ink);position:relative;isolation:isolate}
+.theme-toggle svg{width:20px;height:20px;transition:rotate .6s cubic-bezier(.2,.7,.2,1)}
+.theme-toggle:hover svg{rotate:45deg}
+.theme-toggle:hover{border-color:var(--cyan)}
+.theme-toggle[aria-busy="true"]{cursor:progress}
+.theme-toggle::after{content:'';position:absolute;inset:5px;border:1px solid var(--cyan);opacity:0;scale:.65;transition:opacity .3s,scale .4s}
+.theme-toggle:hover::after,.theme-toggle:focus-visible::after{opacity:.4;scale:1}
+.site-header .menu-toggle{order:4}
+.theme-lattice{position:fixed;inset:0;z-index:1000;pointer-events:none;background-image:linear-gradient(90deg,#009e8c38 1px,transparent 1px),linear-gradient(#009e8c38 1px,transparent 1px);background-size:var(--flip-cell-x) var(--flip-cell-y);will-change:clip-path}
+@media(max-width:640px){.site-header .menu-toggle{min-width:70px;padding-inline:10px}.site-header{gap:10px}.theme-toggle{flex-basis:42px;width:42px}.site-header .wordmark{font-size:16px}.site-header .wordmark span{font-size:19px}}
+/* Native snapshots retain the real text, photos and scroll position. The two
+   page faces are cut into staggered, perspective-shaped tile masks. */
+html[data-theme-transition]::view-transition{background:var(--flip-bed,#18302a);pointer-events:none}
+html[data-theme-transition]::view-transition-group(root){animation:none}
+html[data-theme-transition]::view-transition-image-pair(root){isolation:isolate;background-color:var(--flip-bed,#18302a);background-image:linear-gradient(90deg,#42cdbb20 1px,transparent 1px),linear-gradient(#42cdbb20 1px,transparent 1px),repeating-linear-gradient(115deg,#ffffff04 0px,#ffffff04 1px,transparent 1px,transparent 5px);background-size:var(--flip-cell-x) var(--flip-cell-y),var(--flip-cell-x) var(--flip-cell-y),auto}
+html[data-theme-transition]::view-transition-old(root),html[data-theme-transition]::view-transition-new(root){animation:none;mix-blend-mode:normal;opacity:1;will-change:clip-path}
+html[data-theme-transition]::view-transition-new(root){z-index:2}
+html[data-theme-transition]::view-transition-old(root){z-index:1}
+html[data-theme-transition]::view-transition-image-pair(root)::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background-image:linear-gradient(90deg,#36cebd70 1px,transparent 1px),linear-gradient(#36cebd70 1px,transparent 1px);background-size:var(--flip-cell-x) var(--flip-cell-y);mask-image:radial-gradient(circle at var(--flip-origin-x) var(--flip-origin-y),transparent 33%,black 40%,transparent 49%);animation:theme-grid-pulse 1.65s ease-out both;transform-origin:var(--flip-origin-x) var(--flip-origin-y)}
+@keyframes theme-grid-pulse{0%{scale:.01;opacity:0}12%{opacity:.65}80%{opacity:.3}100%{scale:3.2;opacity:0}}
+@media(prefers-reduced-motion:reduce){.theme-toggle svg,.theme-toggle::after{transition:none}html::view-transition-group(*),html::view-transition-old(*),html::view-transition-new(*){animation:none!important}}

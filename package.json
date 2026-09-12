@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:transitions": "node --test scripts/test-inverse-canvas.mjs",
+    "test:transitions:browser": "node scripts/check-inverse-canvas-browser.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

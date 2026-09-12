@@ -64,8 +64,17 @@ export function EffectDetail({ slug }: { slug: string }) {
   if (!effect || !Comp) return null;
 
   const isGameAsset = effect.category === "game-asset";
-  const backHref = isGameAsset ? "/game-assets" : "/gallery";
-  const backLabel = isGameAsset ? "← Back to game assets" : "← Back to gallery";
+  const isPageTransition = effect.category === "page-transition";
+  const backHref = isGameAsset
+    ? "/game-assets"
+    : isPageTransition
+      ? "/page-transitions"
+      : "/gallery";
+  const backLabel = isGameAsset
+    ? "← Back to game assets"
+    : isPageTransition
+      ? "← Back to page transitions"
+      : "← Back to gallery";
 
   return (
     <main className="mx-auto max-w-6xl px-5 py-10">
@@ -82,13 +91,13 @@ export function EffectDetail({ slug }: { slug: string }) {
               : "panel relative h-[60vh] min-h-[420px] overflow-hidden bg-bg"
           }
         >
-          <div className="h-full w-full">
+          <div className="w-full" style={{ height: effect.portableDemo ? "calc(100% - 44px)" : "100%" }}>
             <Comp params={params} />
           </div>
           <button
             onClick={expanded ? exitExpand : enterExpand}
             title={expanded ? "Exit fullscreen (Esc)" : "Expand to fullscreen"}
-            className="absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-bg-soft/80 px-3 py-1.5 text-xs font-medium text-fg backdrop-blur transition hover:border-accent hover:text-accent"
+            className={`absolute right-3 ${effect.portableDemo ? "bottom-2" : "top-3"} z-10 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-bg-soft/80 px-3 py-1.5 text-xs font-medium text-fg backdrop-blur transition hover:border-accent hover:text-accent`}
           >
             <span aria-hidden className="leading-none">{expanded ? "⤡" : "⤢"}</span>
             {expanded ? "Exit" : "Expand"}

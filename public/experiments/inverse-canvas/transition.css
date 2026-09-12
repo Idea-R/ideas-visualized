@@ -1,0 +1,9 @@
+/* Import with engine.mjs; all snapshot rules are active only during a flip. */
+.inverse-lattice{position:fixed;inset:0;z-index:1000;pointer-events:none;background-image:linear-gradient(90deg,var(--flip-line,#009e8c38) 1px,transparent 1px),linear-gradient(var(--flip-line,#009e8c38) 1px,transparent 1px);background-size:var(--flip-cell-x) var(--flip-cell-y);will-change:clip-path}
+html[data-inverse-transition]::view-transition{background:var(--flip-bed,#18302a);pointer-events:none}
+html[data-inverse-transition]::view-transition-group(root){animation:none}
+html[data-inverse-transition]::view-transition-image-pair(root){isolation:isolate;background-color:var(--flip-bed,#18302a);background-image:linear-gradient(90deg,var(--flip-line,#42cdbb20) 1px,transparent 1px),linear-gradient(var(--flip-line,#42cdbb20) 1px,transparent 1px),repeating-linear-gradient(115deg,#ffffff04 0px,#ffffff04 1px,transparent 1px,transparent 5px);background-size:var(--flip-cell-x) var(--flip-cell-y),var(--flip-cell-x) var(--flip-cell-y),auto}
+html[data-inverse-transition]::view-transition-old(root),html[data-inverse-transition]::view-transition-new(root){animation:none;mix-blend-mode:normal;opacity:1;will-change:clip-path}
+html[data-inverse-transition]::view-transition-new(root){z-index:2}
+html[data-inverse-transition]::view-transition-old(root){z-index:1}
+@media(prefers-reduced-motion:reduce){html[data-inverse-transition]::view-transition-group(*),html[data-inverse-transition]::view-transition-old(*),html[data-inverse-transition]::view-transition-new(*){animation:none!important}}
