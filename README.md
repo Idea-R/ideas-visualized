@@ -65,6 +65,7 @@ All WebGL scenes support **orbit / scroll-to-zoom / pan** camera control with bl
 
 ## Beyond the gallery
 
+- Page Transitions: [Inverse Canvas](/gallery/inverse-canvas) preserves the approved AI Agency Underground tile-flip switch, with density, wave timing, palette, and origin controls. [Pixel Field](/gallery/pixel-field) uses the tile system behind content on hover or tap. Both include presets, fullscreen previews, and a portable demo download. Local implementation notes: [Inverse Canvas](docs/inverse-canvas.md).
 - Experiences: Simon Says, a memory game driven by the custom absorption cursor, and Ideas in Motion, a scroll-driven parallax journey.
 - Research: write-ups on the techniques, including how to fix canvas ghosting, when to pool objects, and how to keep particle-heavy scenes fast.
 

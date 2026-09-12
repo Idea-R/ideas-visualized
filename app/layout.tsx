@@ -38,13 +38,16 @@ export default function RootLayout({
               <Link href="/gallery" className="hover:text-fg">
                 Gallery
               </Link>
-              <Link href="/game-assets" className="hidden hover:text-fg sm:inline">
+              <Link href="/page-transitions" className="hidden hover:text-fg sm:inline">
+                Transitions
+              </Link>
+              <Link href="/game-assets" className="hidden hover:text-fg md:inline">
                 Game Assets
               </Link>
-              <Link href="/experiences" className="hidden hover:text-fg md:inline">
+              <Link href="/experiences" className="hidden hover:text-fg lg:inline">
                 Experiences
               </Link>
-              <Link href="/research" className="hidden hover:text-fg md:inline">
+              <Link href="/research" className="hidden hover:text-fg lg:inline">
                 Research
               </Link>
               <span className="hidden h-4 w-px bg-white/10 sm:inline-block" />

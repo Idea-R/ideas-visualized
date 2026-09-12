@@ -41,6 +41,53 @@ export function ExportPanel({
     URL.revokeObjectURL(url);
   };
 
+  const downloadSettings = () => {
+    const settings = {
+      mode: meta.portableDemo?.mode,
+      ...(meta.presets?.[0]?.params ?? {}),
+      ...params,
+    };
+    const blob = new Blob([JSON.stringify(settings, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${meta.slug}-settings.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  if (meta.portableDemo) {
+    return (
+      <div className="panel p-4">
+        <div className="text-xs font-semibold text-fg">Export</div>
+        <p className="mt-2 text-xs leading-relaxed text-muted">
+          Serve the extracted demo from the same origin and load{" "}
+          <code className="text-fg/80">index.html?mode={meta.portableDemo.mode}</code>{" "}
+          in an iframe. After it sends <code className="text-fg/80">inverse-canvas:ready</code>,
+          post <code className="text-fg/80">inverse-canvas:params</code> messages with the settings.
+          Later updates apply without reloading the iframe.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a
+            href={meta.portableDemo.href}
+            download
+            className="rounded-md bg-accent px-3 py-1.5 text-xs font-semibold text-white transition hover:opacity-90"
+          >
+            Download portable demo
+          </a>
+          <button
+            onClick={downloadSettings}
+            className="rounded-md border border-white/15 px-3 py-1.5 text-xs font-semibold transition hover:border-white/30"
+          >
+            Download settings JSON
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="panel p-4">
       <div className="mb-3 flex items-center justify-between">

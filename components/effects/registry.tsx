@@ -91,6 +91,7 @@ import { FlameJet } from "./flame-jet";
 import { ShieldParry } from "./shield-parry";
 import { ArrowVolley } from "./arrow-volley";
 import { TankTreads } from "./tank-treads";
+import { InverseCanvas, PixelField } from "./inverse-canvas";
 
 type EffectComponent = ComponentType<{ params: EffectProps }>;
 
@@ -184,6 +185,8 @@ export const effectComponents: Record<string, EffectComponent> = {
   "shield-parry": ShieldParry,
   "arrow-volley": ArrowVolley,
   "tank-treads": TankTreads,
+  "inverse-canvas": InverseCanvas,
+  "pixel-field": PixelField,
 };
 
 export function getEffectComponent(slug: string): EffectComponent | undefined {

@@ -45,7 +45,7 @@ export function EffectStage({
   return (
     <div className={className}>
       <div className="relative h-full w-full overflow-hidden bg-bg">
-        {active ? (
+        {active && !meta.portableDemo ? (
           <Comp params={params} />
         ) : (
           <div
@@ -56,7 +56,7 @@ export function EffectStage({
             {/* Poster still of the effect; gradient above shows through if it 404s. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`/posters/${slug}.png`}
+              src={meta.poster ?? `/posters/${slug}.png`}
               alt=""
               loading="lazy"
               decoding="async"
@@ -72,7 +72,7 @@ export function EffectStage({
               </svg>
             </span>
             <span className="absolute bottom-2 right-2 text-[10px] uppercase tracking-widest text-white/60">
-              Hover to play
+              {meta.portableDemo ? "Open playground" : "Hover to play"}
             </span>
           </div>
         )}
